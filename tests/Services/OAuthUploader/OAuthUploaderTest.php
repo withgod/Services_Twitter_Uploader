@@ -27,7 +27,9 @@ chdir(dirname(__FILE__)  . '/../../../');
 
 require_once 'PHPUnit/Autoload.php';
 require_once 'HTTP/OAuth/Consumer.php';
+require_once 'HTTP/Request2.php';
 
+require_once 'Services/OAuthUploader/Exception.php';
 require_once 'Services/OAuthUploader/TwippleUploader.php';
 require_once 'Services/OAuthUploader/TwitpicUploader.php';
 require_once 'Services/OAuthUploader/YfrogUploader.php';
@@ -89,7 +91,21 @@ class Services_OAuthUploaderTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testPlixi() {
+        $isFailure = false;
+        try {
+            $tmp = new Services_PlixiUploader($this->oauth);
+        } catch (Services_OAuthUploader_Exception $e) {
+            $isFailure = true;
+        }
+        $this->assertTrue($isFailure, 'no caught noapi exception');
         $uploader = new Services_PlixiUploader($this->oauth, $this->apiKeys['plixi']);
+        $isFailure = false;
+        try {
+            $url = $uploader->upload('./xyz/test.jpg');
+        } catch (Services_OAuthUploader_Exception $e) {
+            $isFailure = true;
+        }
+        $this->assertTrue($isFailure, 'no caught file not found exception');
         $url = $uploader->upload('./tests/test.jpg');
         $this->assertTrue(is_string($url));
         $this->assertRegExp('/^http:\/\/plixi\.com\/p\/\d{8}$/', $url, 'invalid media url');
@@ -100,6 +116,22 @@ class Services_OAuthUploaderTest extends PHPUnit_Framework_TestCase {
         $url = $uploader->upload('./tests/test.jpg', 'upload from services_oauthuploader/'  . $this->testAt);
         $this->assertTrue(is_string($url));
         $this->assertRegExp('/^http:\/\/twitgoo\.com\/[a-zA-Z0-9]{6}$/', $url, 'invalid media url');
+    }
+
+    public function testTwitpicWithProxy() {
+        if (isset($_SERVER['SOA_PROXY_TEST']) && $_SERVER['SOA_PROXY_TEST']) {
+            $req = new HTTP_Request2();
+            $req->setConfig(array(
+                'proxy_host' => $_SERVER['SOA_PROXY_HOST'],
+                'proxy_port' => $_SERVER['SOA_PROXY_PORT']
+            ));
+            $uploader = new Services_TwitpicUploader($this->oauth, $this->apiKeys['twitpic'], $req);
+            $url = $uploader->upload('./tests/test.jpg', 'upload from services_oauthuploader with Proxy/'  . $this->testAt);
+            $this->assertTrue(is_string($url));
+            $this->assertRegExp('/^http:\/\/twitpic\.com\/[a-zA-Z0-9]{6}$/', $url, 'invalid media url');
+        } else {
+            $this->assertTrue(true, 'skip proxy test');
+        }
     }
 }
 

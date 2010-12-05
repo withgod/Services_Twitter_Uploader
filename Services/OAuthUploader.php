@@ -134,7 +134,7 @@ abstract class Services_OAuthUploader {
         $this->apiKey = $apiKey;
  
         if ($request !== null) {
-            $this->accept($request);
+            $this->request = $request;
         } else {
             $this->request = new HTTP_Request2();
             $this->request->setHeader('User-Agent', 
