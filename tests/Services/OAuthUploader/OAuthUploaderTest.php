@@ -78,7 +78,7 @@ class Services_OAuthUploaderTest extends PHPUnit_Framework_TestCase {
         $uploader = new Services_YfrogUploader($this->oauth);
         $url = $uploader->upload('./tests/test.jpg', 'upload from services_oauthuploader/'  . $this->testAt);
         $this->assertTrue(is_string($url));
-        $this->assertRegExp('/^http:\/\/yfrog\.com\/[a-zA-Z0-9]{7,8}$/', $url, 'invalid media url');
+        $this->assertRegExp('/^http:\/\/yfrog\.com\/[a-zA-Z0-9]{6,10}$/', $url, 'invalid media url');
     }
 
     public function testImgly() {
