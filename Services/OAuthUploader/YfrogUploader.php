@@ -21,7 +21,7 @@
  * @package   Services_OAuthUploader
  * @author    withgod <noname@withgod.jp> 
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version   1.0.0
+ * @version   0.1.0
  * @link      https://github.com/withgod/Services_OAuthUploader
  */
 
@@ -35,7 +35,7 @@ require_once 'Services/OAuthUploader.php';
  * @package   Services_OAuthUploader
  * @author    withgod <noname@withgod.jp> 
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version   1.0.0
+ * @version   0.1.0
  * @link      https://github.com/withgod/Services_OAuthUploader
  * @link      http://code.google.com/p/imageshackapi/
  * @link      http://code.google.com/p/imageshackapi/wiki/TwitterAuthentication
