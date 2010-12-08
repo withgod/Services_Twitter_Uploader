@@ -1,4 +1,4 @@
-<?
+<?php
 // vim: ts=4:sw=4:sts=4:ff=unix:fenc=utf-8:et
 /**
  * An abstract interface for OAuthUploader Services
@@ -19,7 +19,7 @@
  *
  * @category  Services
  * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp> 
+ * @author    withgod <noname@withgod.jp>
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version   0.1.0
  * @link      https://github.com/withgod/Services_OAuthUploader
@@ -34,7 +34,7 @@ require_once 'Services/OAuthUploader/Exception.php';
  *
  * @category  Services
  * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp> 
+ * @author    withgod <noname@withgod.jp>
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version   0.1.0
  * @link      https://github.com/withgod/Services_OAuthUploader
@@ -112,7 +112,7 @@ abstract class Services_OAuthUploader {
      */
     protected $request = null;
 
-    
+
     /**
      * upload response object
      * @see HTTP_Request2_Response
@@ -122,7 +122,7 @@ abstract class Services_OAuthUploader {
 
     /**
      * Constructor
-     * 
+     *
      * @see HTTP_OAuth_Consumer
      * @see HTTP_Request2
      * @param HTTP_OAuth_Consumer $oauth
@@ -132,12 +132,12 @@ abstract class Services_OAuthUploader {
     function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null) {
         $this->oauth = $oauth;
         $this->apiKey = $apiKey;
- 
+
         if ($request !== null) {
             $this->request = $request;
         } else {
             $this->request = new HTTP_Request2();
-            $this->request->setHeader('User-Agent', 
+            $this->request->setHeader('User-Agent',
                         'Services_OAuthUploader/' . get_class($this) .
                         ' PHP_VERSION/' . PHP_VERSION .
                         ' PHP_OS/' . PHP_OS
@@ -150,7 +150,7 @@ abstract class Services_OAuthUploader {
     /**
      * upload method.
      * do not all provider require apikey do not supported send message.
-     * 
+     *
      * @param string $filePath path to upload fie
      * @param sting $message tweet
      * @throws {@link Services_OAuthUploader_Exception}
@@ -224,7 +224,7 @@ abstract class Services_OAuthUploader {
     }
 
     /**
-     * 
+     *
      * utility method.
      * if provider is in request based implementation of oauth echo. this method use
      *
@@ -246,7 +246,7 @@ abstract class Services_OAuthUploader {
      * see other implmention classes
      */
     abstract protected function preUpload();
-    
+
     /**
      * extends classes should implments this method.
      * see other implmention classes

@@ -1,4 +1,4 @@
-<?
+<?php
 // vim: ts=4:sw=4:sts=4:ff=unix:fenc=utf-8:et
 /**
  * An abstract interface for OAuthUploader Services
@@ -19,7 +19,7 @@
  *
  * @category  Services
  * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp> 
+ * @author    withgod <noname@withgod.jp>
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version   0.1.0
  * @link      https://github.com/withgod/Services_OAuthUploader
@@ -33,7 +33,7 @@ require_once 'Services/OAuthUploader.php';
  *
  * @category  Services
  * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp> 
+ * @author    withgod <noname@withgod.jp>
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version   0.1.0
  * @link      https://github.com/withgod/Services_OAuthUploader
@@ -51,7 +51,7 @@ class Services_PlixiUploader extends Services_OAuthUploader {
 
     /**
      * Constructor
-     * 
+     *
      * @see HTTP_OAuth_Consumer
      * @see HTTP_Request2
      * @param HTTP_OAuth_Consumer $oauth
