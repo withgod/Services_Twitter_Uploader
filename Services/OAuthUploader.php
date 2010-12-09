@@ -247,10 +247,20 @@ abstract class Services_OAuthUploader
         return 'OAuth realm="http://api.twitter.com/", ' . implode(', ', $pairs);
     }
 
+    /**
+     * create uploader instance method.
+     *
+     * @param string $serviceName uploader service name self::services
+     * @param HTTP_OAuth_Consumer oauth consumer instance {@link HTTP_OAuth_Consumer}
+     * @param HTTP_Request2 {@link HTTP_Request2}
+     *
+     * @throws {@link Services_OAuthUploader_Exception}
+     *
+     * @return object {@link Services_OAuthUploader}
+     */
     public static function factory($serviceName, $oauth, $apiKey = null, $request = null)
     {
         $lc = strtolower($serviceName);
-        //var_dump(array($oauth,  $apiKey,  $request));
         if (in_array($lc, self::$services)) {
             $uc = ucwords($lc);
             include_once "Services/OAuthUploader/{$uc}Uploader.php";
