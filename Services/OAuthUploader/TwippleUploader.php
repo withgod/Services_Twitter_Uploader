@@ -40,7 +40,8 @@ require_once 'Services/OAuthUploader.php';
  * @link      http://p.twipple.jp/api.php
  * @see       HTTP_Request2
  */
-class Services_TwippleUploader extends Services_OAuthUploader {
+class Services_TwippleUploader extends Services_OAuthUploader
+{
 
     /**
      * upload endpoint
@@ -58,7 +59,8 @@ class Services_TwippleUploader extends Services_OAuthUploader {
      * @param string $apiKey not required
      * @param HTTP_Request2 $request
      */
-    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null) {
+    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null)
+    {
         parent::__construct($oauth, $apiKey, $request);
     }
 
@@ -66,7 +68,8 @@ class Services_TwippleUploader extends Services_OAuthUploader {
     /**
      * preUpload implementation
      */
-    protected function preUpload() {
+    protected function preUpload()
+    {
         try {
             $this->request->addUpload('media', $this->postFile);
         } catch (HTTP_Request2_Exception $e) {
@@ -78,7 +81,8 @@ class Services_TwippleUploader extends Services_OAuthUploader {
     /**
      * postUpload implementation
      */
-    protected function postUpload() {
+    protected function postUpload()
+    {
         if (!empty($this->postException)) {
             throw new Services_OAuthUploader_Exception($this->postException->getMessage());
         }

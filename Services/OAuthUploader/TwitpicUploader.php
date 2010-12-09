@@ -40,7 +40,8 @@ require_once 'Services/OAuthUploader.php';
  * @link      http://dev.twitpic.com/
  * @see       HTTP_Request2
  */
-class Services_TwitpicUploader extends Services_OAuthUploader {
+class Services_TwitpicUploader extends Services_OAuthUploader
+{
 
     /**
      * upload endpoint
@@ -58,7 +59,8 @@ class Services_TwitpicUploader extends Services_OAuthUploader {
      * @param HTTP_Request2 $request
      * @throws Services_OAuthUploader_Exception
      */
-    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null) {
+    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null)
+    {
         parent::__construct($oauth, $apiKey, $request);
         if (empty($apiKey)) {
             throw new Services_OAuthUploader_Exception('TwitpicUploader require apiKey');
@@ -68,7 +70,8 @@ class Services_TwitpicUploader extends Services_OAuthUploader {
     /**
      * preUpload implementation
      */
-    protected function preUpload() {
+    protected function preUpload()
+    {
         $this->request->setConfig('ssl_verify_peer', false);
         $this->request->addPostParameter('key', $this->apiKey);
         if (!empty($this->postMessage)) {
@@ -88,7 +91,8 @@ class Services_TwitpicUploader extends Services_OAuthUploader {
     /**
      * postUpload implementation
      */
-    protected function postUpload() {
+    protected function postUpload()
+    {
         if (!empty($this->postException)) {
             throw new Services_OAuthUploader_Exception($this->postException->getMessage());
         }

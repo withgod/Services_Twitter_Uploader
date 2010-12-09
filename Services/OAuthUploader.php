@@ -41,7 +41,8 @@ require_once 'Services/OAuthUploader/Exception.php';
  * @see HTTP_Request2
  * @see HTTP_OAuth_Consumer
  */
-abstract class Services_OAuthUploader {
+abstract class Services_OAuthUploader
+{
     const TWITTER_VERIFY_CREDENTIALS_JSON = "https://api.twitter.com/1/account/verify_credentials.json";
     const TWITTER_VERIFY_CREDENTIALS_XML  = "https://api.twitter.com/1/account/verify_credentials.xml";
 
@@ -129,7 +130,8 @@ abstract class Services_OAuthUploader {
      * @param string $apiKey
      * @param HTTP_Request2 $request
      */
-    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null) {
+    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null)
+    {
         $this->oauth = $oauth;
         $this->apiKey = $apiKey;
 
@@ -155,7 +157,8 @@ abstract class Services_OAuthUploader {
      * @param sting $message tweet
      * @throws {@link Services_OAuthUploader_Exception}
      */
-    function upload($filePath = null, $message = null) {
+    function upload($filePath = null, $message = null)
+    {
         $this->postFile    = $filePath;
         $this->postMessage = $message;
         $this->request->setUrl($this->uploadUrl);
@@ -188,7 +191,8 @@ abstract class Services_OAuthUploader {
      * @param string $verify_url verify_url url
      * @return array signed parameter and signature array
      */
-    protected function buildSignature($verify_url) {
+    protected function buildSignature($verify_url)
+    {
         $signature = HTTP_OAuth_Signature::factory($this->oauth->getSignatureMethod());
         $params = array(
             'oauth_consumer_key'              => $this->oauth->getKey(),
@@ -212,7 +216,8 @@ abstract class Services_OAuthUploader {
      * @param string $verify_url verify_url url
      * @return string signed verify_url to url format
      */
-    protected function genVerifyUrl($verify_url) {
+    protected function genVerifyUrl($verify_url)
+    {
         $params = $this->buildSignature($verify_url);
         $pairs = array();
         foreach ($params as $k => $v) {
@@ -231,7 +236,8 @@ abstract class Services_OAuthUploader {
      * @param string $verify_url verify_url url
      * @return string signed verify_url to request header format
      */
-    protected function genVerifyHeader($verify_url) {
+    protected function genVerifyHeader($verify_url)
+    {
         $params = $this->buildSignature($verify_url);
         $pairs = array();
         foreach ($params as $k => $v) {

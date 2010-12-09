@@ -38,7 +38,8 @@ require_once 'PEAR/Exception.php';
  * @link      https://github.com/withgod/Services_OAuthUploader
  * @see       PEAR_Exception
  */
-class Services_OAuthUploader_Exception extends PEAR_Exception {
+class Services_OAuthUploader_Exception extends PEAR_Exception
+{
 }
 
 ?>

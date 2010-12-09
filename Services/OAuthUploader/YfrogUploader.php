@@ -41,7 +41,8 @@ require_once 'Services/OAuthUploader.php';
  * @link      http://code.google.com/p/imageshackapi/wiki/TwitterAuthentication
  * @see       HTTP_Request2
  */
-class Services_YfrogUploader extends Services_OAuthUploader {
+class Services_YfrogUploader extends Services_OAuthUploader
+{
 
     /**
      * upload endpoint
@@ -67,7 +68,8 @@ class Services_YfrogUploader extends Services_OAuthUploader {
     /**
      * preUpload implementation
      */
-    protected function preUpload() {
+    protected function preUpload()
+    {
         $this->request->setConfig('ssl_verify_peer', false);
         try {
             $this->request->addUpload('media', $this->postFile);
@@ -83,7 +85,8 @@ class Services_YfrogUploader extends Services_OAuthUploader {
     /**
      * postUpload implementation
      */
-    protected function postUpload() {
+    protected function postUpload()
+    {
         if (!empty($this->postException)) {
             throw new Services_OAuthUploader_Exception($this->postException->getMessage());
         }

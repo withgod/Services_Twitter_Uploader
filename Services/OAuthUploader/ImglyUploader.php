@@ -40,7 +40,8 @@ require_once 'Services/OAuthUploader.php';
  * @link      http://img.ly/api/docs
  * @see       HTTP_Request2
  */
-class Services_ImglyUploader extends Services_OAuthUploader {
+class Services_ImglyUploader extends Services_OAuthUploader
+{
 
     /**
      * upload endpoint
@@ -58,14 +59,16 @@ class Services_ImglyUploader extends Services_OAuthUploader {
      * @param HTTP_Request2 $request
      * @throws Services_OAuthUploader_Exception
      */
-    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null) {
+    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null)
+    {
         parent::__construct($oauth, $apiKey, $request);
     }
 
     /**
      * preUpload implementation
      */
-    protected function preUpload() {
+    protected function preUpload()
+    {
         $this->request->setConfig('ssl_verify_peer', false);
         if (!empty($this->postMessage)) {
             $this->request->addPostParameter('message', $this->postMessage);
@@ -84,7 +87,8 @@ class Services_ImglyUploader extends Services_OAuthUploader {
     /**
      * postUpload implementation
      */
-    protected function postUpload() {
+    protected function postUpload()
+    {
         if (!empty($this->postException)) {
             throw new Services_OAuthUploader_Exception($this->postException->getMessage());
         }
