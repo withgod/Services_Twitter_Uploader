@@ -247,6 +247,20 @@ abstract class Services_OAuthUploader
         return 'OAuth realm="http://api.twitter.com/", ' . implode(', ', $pairs);
     }
 
+    public static function factory($serviceName, $oauth, $apiKey = null, $request = null)
+    {
+        $lc = strtolower($serviceName);
+        //var_dump(array($oauth,  $apiKey,  $request));
+        if (in_array($lc, self::$services)) {
+            $uc = ucwords($lc);
+            include_once "Services/OAuthUploader/{$uc}Uploader.php";
+            $clazz = "Services_{$uc}Uploader";
+            return new $clazz($oauth, $apiKey,  $request);
+        } else {
+            throw new Services_OAuthUploader_Exception('unknown service name' . $serviceName . ']');
+        }
+    }
+
     /**
      * extends classes should implments this method.
      * see other implmention classes

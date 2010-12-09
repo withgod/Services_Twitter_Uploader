@@ -29,13 +29,8 @@ require_once 'PHPUnit/Autoload.php';
 require_once 'HTTP/OAuth/Consumer.php';
 require_once 'HTTP/Request2.php';
 
+require_once 'Services/OAuthUploader.php';
 require_once 'Services/OAuthUploader/Exception.php';
-require_once 'Services/OAuthUploader/TwippleUploader.php';
-require_once 'Services/OAuthUploader/TwitpicUploader.php';
-require_once 'Services/OAuthUploader/YfrogUploader.php';
-require_once 'Services/OAuthUploader/ImglyUploader.php';
-require_once 'Services/OAuthUploader/PlixiUploader.php';
-require_once 'Services/OAuthUploader/TwitgooUploader.php';
 
 /**
  * Test of Services_OAuthUploader implementation
@@ -62,29 +57,39 @@ class Services_OAuthUploaderTest extends PHPUnit_Framework_TestCase {
         $this->testAt = date(DATE_RFC822);
     }
 
+    public function testFactory() {
+        $isFailure = false;
+        try {
+            $uploader = Services_OAuthUploader::factory('fizzbuzz', $this->oauth);
+        } catch (Services_OAuthUploader_Exception $e) {
+            $isFailure = true;
+        }
+        $this->assertTrue($isFailure);
+    }
+
     public function testTwipple() {
-        $uploader = new Services_TwippleUploader($this->oauth);
+        $uploader = Services_OAuthUploader::factory('twipple', $this->oauth);
         $url = $uploader->upload('./tests/test.jpg');
         $this->assertTrue(is_string($url));
         $this->assertRegExp('/^http:\/\/p\.twipple\.jp\/[a-zA-Z0-9]{5}$/', $url, 'invalid media url');
     }
 
     public function testTwitpic() {
-        $uploader = new Services_TwitpicUploader($this->oauth, $this->apiKeys['twitpic']);
+        $uploader = Services_OAuthUploader::factory('twitpic', $this->oauth,  $this->apiKeys['twitpic']);
         $url = $uploader->upload('./tests/test.jpg', 'upload from services_oauthuploader/'  . $this->testAt);
         $this->assertTrue(is_string($url));
         $this->assertRegExp('/^http:\/\/twitpic\.com\/[a-zA-Z0-9]{6}$/', $url, 'invalid media url');
     }
 
     public function testYfrog() {
-        $uploader = new Services_YfrogUploader($this->oauth);
+        $uploader = Services_OAuthUploader::factory('yfrog', $this->oauth);
         $url = $uploader->upload('./tests/test.jpg', 'upload from services_oauthuploader/'  . $this->testAt);
         $this->assertTrue(is_string($url));
         $this->assertRegExp('/^http:\/\/yfrog\.com\/[a-zA-Z0-9]{6,10}$/', $url, 'invalid media url');
     }
 
     public function testImgly() {
-        $uploader = new Services_ImglyUploader($this->oauth);
+        $uploader = Services_OAuthUploader::factory('imgly', $this->oauth);
         $url = $uploader->upload('./tests/test.jpg', 'upload from services_oauthuploader/'  . $this->testAt);
         $this->assertTrue(is_string($url));
         $this->assertRegExp('/^http:\/\/img\.ly\/[a-zA-Z0-9]{4}$/', $url, 'invalid media url');
@@ -93,12 +98,12 @@ class Services_OAuthUploaderTest extends PHPUnit_Framework_TestCase {
     public function testPlixi() {
         $isFailure = false;
         try {
-            $tmp = new Services_PlixiUploader($this->oauth);
+            $tmp = Services_OAuthUploader::factory('plixi', $this->oauth);
         } catch (Services_OAuthUploader_Exception $e) {
             $isFailure = true;
         }
         $this->assertTrue($isFailure, 'no caught noapi exception');
-        $uploader = new Services_PlixiUploader($this->oauth, $this->apiKeys['plixi']);
+        $uploader = Services_OAuthUploader::factory('plixi', $this->oauth, $this->apiKeys['plixi']);
         $isFailure = false;
         try {
             $url = $uploader->upload('./xyz/test.jpg');
@@ -112,7 +117,7 @@ class Services_OAuthUploaderTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testTwitgoo() {
-        $uploader = new Services_TwitgooUploader($this->oauth);
+        $uploader = Services_OAuthUploader::factory('twitgoo', $this->oauth);
         $url = $uploader->upload('./tests/test.jpg', 'upload from services_oauthuploader/'  . $this->testAt);
         $this->assertTrue(is_string($url));
         $this->assertRegExp('/^http:\/\/twitgoo\.com\/[a-zA-Z0-9]{6}$/', $url, 'invalid media url');
@@ -125,7 +130,7 @@ class Services_OAuthUploaderTest extends PHPUnit_Framework_TestCase {
                 'proxy_host' => $_SERVER['SOA_PROXY_HOST'],
                 'proxy_port' => $_SERVER['SOA_PROXY_PORT']
             ));
-            $uploader = new Services_TwitpicUploader($this->oauth, $this->apiKeys['twitpic'], $req);
+            $uploader = Services_OAuthUploader::factory('twitpic', $this->oauth,  $this->apiKeys['twitpic'], $req);
             $url = $uploader->upload('./tests/test.jpg', 'upload from services_oauthuploader with Proxy/'  . $this->testAt);
             $this->assertTrue(is_string($url));
             $this->assertRegExp('/^http:\/\/twitpic\.com\/[a-zA-Z0-9]{6}$/', $url, 'invalid media url');
