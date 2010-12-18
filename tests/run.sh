@@ -5,4 +5,5 @@
 #export SOA_PROXY_PORT=3128
 
 mkdir -p ./reports/coverage
-phpunit
+phpunit AllTests.php
+
