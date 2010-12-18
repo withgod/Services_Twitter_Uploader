@@ -8,9 +8,18 @@
     syntaxCheck="false"
     verbose="true"
     strict="true">
+    <php>
+        <includePath>../src</includePath>
+    </php>
     <testsuites>
         <testsuite name="OAuthUploader Test Suite">
-            <file>./Services/OAuthUploader/OAuthUploaderTest.php</file>
+            <file>Services/OAuthUploader/ImglyTest.php</file>
+            <file>Services/OAuthUploader/PlixiTest.php</file>
+            <file>Services/OAuthUploader/TwippleTest.php</file>
+            <file>Services/OAuthUploader/TwippleTest.php</file>
+            <file>Services/OAuthUploader/TwitgooTest.php</file>
+            <file>Services/OAuthUploader/TwitpicTest.php</file>
+            <file>Services/OAuthUploader/YfrogTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
