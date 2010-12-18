@@ -29,6 +29,12 @@ require_once 'HTTP/Request2.php';
 
 require_once 'Services/OAuthUploader.php';
 require_once 'Services/OAuthUploader/Exception.php';
+require_once 'Services/OAuthUploader/ImglyUploader.php';
+require_once 'Services/OAuthUploader/PlixiUploader.php';
+require_once 'Services/OAuthUploader/TwippleUploader.php';
+require_once 'Services/OAuthUploader/TwitgooUploader.php';
+require_once 'Services/OAuthUploader/TwitpicUploader.php';
+require_once 'Services/OAuthUploader/YfrogUploader.php';
 
 /**
  * Test of Services_OAuthUploader BaseClass
@@ -55,15 +61,23 @@ class Services_OAuthUploaderBaseTest extends PHPUnit_Framework_TestCase {
                         '222492812-2j7GRaAcKQhkNKgrpN6cQGRdd52blsbHzLKQE594', 'UdSZh5ScU58UahBojEyc1zQK5AVk1TAQDsRX97lvTRY'
                         );
         $this->testAt = date(DATE_RFC822);
-        preg_match('/Services_([a-zA-Z]+)Test$/', get_class($this), $matches);
-        $this->target = $matches[1];
+        preg_match('/Services_([a-zA-Z]+)UploaderTest$/', get_class($this), $matches);
+        $this->service = $matches[1];
     }
 
     public function testInitialze() {
+        $isFailure = false;
+        try {
+            $tmp = Services_OAuthUploader::factory('fizzbuzz', $this->oauth);
+        } catch (Services_OAuthUploader_Exception $e) {
+            $isFailure = true;
+        }
+        $this->assertTrue($isFailure, 'no caught unknown service exception');
+
         if (!empty($this->apiKey)) {
             $isFailure = false;
             try {
-                $tmp = Services_OAuthUploader::factory($this->service, $oauth);
+                $tmp = Services_OAuthUploader::factory($this->service, $this->oauth);
             } catch (Services_OAuthUploader_Exception $e) {
                 $isFailure = true;
             }

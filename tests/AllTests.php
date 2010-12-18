@@ -1,4 +1,4 @@
-<?php
+<?
 // vim: ts=4:sw=4:sts=4:ff=unix:fenc=utf-8:et
 /**
  * PHP version 5.2.0+
@@ -23,19 +23,28 @@
  * @link      https://github.com/withgod/Services_OAuthUploader
  */
 
-require_once 'Services/OAuthUploader/OAuthUploaderBaseTest.php';
+require_once('PHPUnit/Autoload.php');
 
-/**
- * YFrog test class
- *
- * @category  Services
- * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp>
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @link      https://github.com/withgod/Services_OAuthUploader
- */
-class Services_YfrogUploaderTest extends Services_OAuthUploaderBaseTest {
-    protected $resultRegex = '/^http:\/\/yfrog\.com\/[a-zA-Z0-9]{6,20}$/';
+require_once 'Services/OAuthUploader/ImglyTest.php';
+require_once 'Services/OAuthUploader/PlixiTest.php';
+require_once 'Services/OAuthUploader/TwippleTest.php';
+require_once 'Services/OAuthUploader/TwitgooTest.php';
+require_once 'Services/OAuthUploader/TwitpicTest.php';
+require_once 'Services/OAuthUploader/YfrogTest.php';
+
+class Framework_AllTests
+{
+	public static function suite()
+	{
+		$suite = new PHPUnit_Framework_TestSuite('OAuthUploader AllTestSuite');
+
+		$suite->addTestSuite('Services_TwippleUploaderTest');
+		$suite->addTestSuite('Services_YfrogUploaderTest');
+		$suite->addTestSuite('Services_TwitpicUploaderTest');
+		$suite->addTestSuite('Services_PlixiUploaderTest');
+		$suite->addTestSuite('Services_TwitgooUploaderTest');
+		$suite->addTestSuite('Services_ImglyUploaderTest');
+
+		return $suite;
+	}
 }
-
-?>
