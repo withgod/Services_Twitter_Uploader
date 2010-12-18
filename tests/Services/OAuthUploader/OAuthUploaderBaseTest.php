@@ -92,7 +92,7 @@ class Services_OAuthUploaderBaseTest extends PHPUnit_Framework_TestCase {
      * @depends testInitialze
      */
     public function testUpload($uploader) {
-        $url = $uploader->upload($this->uploadFile);
+        $url = $uploader->upload($this->uploadFile, 'Services_OAuthUploader' . $this->testAt);
         $this->uploadUrl = $url;
         $this->assertTrue(is_string($url), 'uploaded url variable is no string [' . $url . ']');
         $this->assertRegExp($this->resultRegex, $url, 'invalid media url [' . $url . ']');
