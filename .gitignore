@@ -1,3 +1,9 @@
 tests/reports/*
 .DS_Store
+.project
+.settings
 ~$*
+*.iml
+*.ipr
+*.iws
+
