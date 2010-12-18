@@ -1,4 +1,4 @@
-<?
+<?php
 // vim: ts=4:sw=4:sts=4:ff=unix:fenc=utf-8:et
 /**
  * An abstract interface for OAuthUploader Services
@@ -19,7 +19,7 @@
  *
  * @category  Services
  * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp> 
+ * @author    withgod <noname@withgod.jp>
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version   0.1.0
  * @link      https://github.com/withgod/Services_OAuthUploader
@@ -34,14 +34,15 @@ require_once 'Services/OAuthUploader/Exception.php';
  *
  * @category  Services
  * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp> 
+ * @author    withgod <noname@withgod.jp>
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version   0.1.0
  * @link      https://github.com/withgod/Services_OAuthUploader
  * @see HTTP_Request2
  * @see HTTP_OAuth_Consumer
  */
-abstract class Services_OAuthUploader {
+abstract class Services_OAuthUploader
+{
     const TWITTER_VERIFY_CREDENTIALS_JSON = "https://api.twitter.com/1/account/verify_credentials.json";
     const TWITTER_VERIFY_CREDENTIALS_XML  = "https://api.twitter.com/1/account/verify_credentials.xml";
 
@@ -112,7 +113,7 @@ abstract class Services_OAuthUploader {
      */
     protected $request = null;
 
-    
+
     /**
      * upload response object
      * @see HTTP_Request2_Response
@@ -122,22 +123,23 @@ abstract class Services_OAuthUploader {
 
     /**
      * Constructor
-     * 
+     *
      * @see HTTP_OAuth_Consumer
      * @see HTTP_Request2
      * @param HTTP_OAuth_Consumer $oauth
      * @param string $apiKey
      * @param HTTP_Request2 $request
      */
-    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null) {
+    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null)
+    {
         $this->oauth = $oauth;
         $this->apiKey = $apiKey;
- 
+
         if ($request !== null) {
             $this->request = $request;
         } else {
             $this->request = new HTTP_Request2();
-            $this->request->setHeader('User-Agent', 
+            $this->request->setHeader('User-Agent',
                         'Services_OAuthUploader/' . get_class($this) .
                         ' PHP_VERSION/' . PHP_VERSION .
                         ' PHP_OS/' . PHP_OS
@@ -150,12 +152,13 @@ abstract class Services_OAuthUploader {
     /**
      * upload method.
      * do not all provider require apikey do not supported send message.
-     * 
+     *
      * @param string $filePath path to upload fie
      * @param sting $message tweet
      * @throws {@link Services_OAuthUploader_Exception}
      */
-    function upload($filePath = null, $message = null) {
+    function upload($filePath = null, $message = null)
+    {
         $this->postFile    = $filePath;
         $this->postMessage = $message;
         $this->request->setUrl($this->uploadUrl);
@@ -188,7 +191,8 @@ abstract class Services_OAuthUploader {
      * @param string $verify_url verify_url url
      * @return array signed parameter and signature array
      */
-    protected function buildSignature($verify_url) {
+    protected function buildSignature($verify_url)
+    {
         $signature = HTTP_OAuth_Signature::factory($this->oauth->getSignatureMethod());
         $params = array(
             'oauth_consumer_key'              => $this->oauth->getKey(),
@@ -212,7 +216,8 @@ abstract class Services_OAuthUploader {
      * @param string $verify_url verify_url url
      * @return string signed verify_url to url format
      */
-    protected function genVerifyUrl($verify_url) {
+    protected function genVerifyUrl($verify_url)
+    {
         $params = $this->buildSignature($verify_url);
         $pairs = array();
         foreach ($params as $k => $v) {
@@ -224,14 +229,15 @@ abstract class Services_OAuthUploader {
     }
 
     /**
-     * 
+     *
      * utility method.
      * if provider is in request based implementation of oauth echo. this method use
      *
      * @param string $verify_url verify_url url
      * @return string signed verify_url to request header format
      */
-    protected function genVerifyHeader($verify_url) {
+    protected function genVerifyHeader($verify_url)
+    {
         $params = $this->buildSignature($verify_url);
         $pairs = array();
         foreach ($params as $k => $v) {
@@ -242,11 +248,35 @@ abstract class Services_OAuthUploader {
     }
 
     /**
+     * create uploader instance method.
+     *
+     * @param string $serviceName uploader service name self::services
+     * @param HTTP_OAuth_Consumer oauth consumer instance {@link HTTP_OAuth_Consumer}
+     * @param HTTP_Request2 {@link HTTP_Request2}
+     *
+     * @throws {@link Services_OAuthUploader_Exception}
+     *
+     * @return object {@link Services_OAuthUploader}
+     */
+    public static function factory($serviceName, $oauth, $apiKey = null, $request = null)
+    {
+        $lc = strtolower($serviceName);
+        if (in_array($lc, self::$services)) {
+            $uc = ucwords($lc);
+            include_once "Services/OAuthUploader/{$uc}Uploader.php";
+            $clazz = "Services_{$uc}Uploader";
+            return new $clazz($oauth, $apiKey,  $request);
+        } else {
+            throw new Services_OAuthUploader_Exception('unknown service name' . $serviceName . ']');
+        }
+    }
+
+    /**
      * extends classes should implments this method.
      * see other implmention classes
      */
     abstract protected function preUpload();
-    
+
     /**
      * extends classes should implments this method.
      * see other implmention classes

@@ -1,4 +1,4 @@
-<?
+<?php
 // vim: ts=4:sw=4:sts=4:ff=unix:fenc=utf-8:et
 /**
  * An abstract interface for OAuthUploader Services
@@ -19,7 +19,7 @@
  *
  * @category  Services
  * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp> 
+ * @author    withgod <noname@withgod.jp>
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version   0.1.0
  * @link      https://github.com/withgod/Services_OAuthUploader
@@ -33,14 +33,15 @@ require_once 'Services/OAuthUploader.php';
  *
  * @category  Services
  * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp> 
+ * @author    withgod <noname@withgod.jp>
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version   0.1.0
  * @link      https://github.com/withgod/Services_OAuthUploader
  * @link      http://p.twipple.jp/api.php
  * @see       HTTP_Request2
  */
-class Services_TwippleUploader extends Services_OAuthUploader {
+class Services_TwippleUploader extends Services_OAuthUploader
+{
 
     /**
      * upload endpoint
@@ -51,14 +52,15 @@ class Services_TwippleUploader extends Services_OAuthUploader {
 
     /**
      * Constructor
-     * 
+     *
      * @see HTTP_OAuth_Consumer
      * @see HTTP_Request2
      * @param HTTP_OAuth_Consumer $oauth
      * @param string $apiKey not required
      * @param HTTP_Request2 $request
      */
-    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null) {
+    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null)
+    {
         parent::__construct($oauth, $apiKey, $request);
     }
 
@@ -66,7 +68,8 @@ class Services_TwippleUploader extends Services_OAuthUploader {
     /**
      * preUpload implementation
      */
-    protected function preUpload() {
+    protected function preUpload()
+    {
         try {
             $this->request->addUpload('media', $this->postFile);
         } catch (HTTP_Request2_Exception $e) {
@@ -78,7 +81,8 @@ class Services_TwippleUploader extends Services_OAuthUploader {
     /**
      * postUpload implementation
      */
-    protected function postUpload() {
+    protected function postUpload()
+    {
         if (!empty($this->postException)) {
             throw new Services_OAuthUploader_Exception($this->postException->getMessage());
         }
