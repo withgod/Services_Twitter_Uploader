@@ -1,6 +1,7 @@
 tests/reports/*
 .DS_Store
 .project
+build/
 .settings
 ~$*
 *.iml
