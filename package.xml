@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Services_OAuthUploader</name>
+ <channel>__uri</channel>
+ <summary>simple, easy post OAuth Echo Upload services.</summary>
+ <description>
+    simple and easy post OAuth Echo Upload services.
+
+    support upload service
+    http://img.ly/api/docs
+    http://twitgoo.com/a/help
+    http://dev.twitpic.com/
+    http://code.google.com/p/imageshackapi/
+    http://p.twipple.jp/api.php
+    http://plixi.com/api
+
+sources
+github
+https://github.com/withgod/Services_OAuthUploader/
+hudson
+http://sakura.withgod.jp/hudson/
+
+ </description>
+ <lead>
+  <name>takumi k</name>
+  <user>withgod</user>
+  <email>noname@withgod.jp</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-12-25</date>
+ <time>03:31:19</time>
+ <version>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.apache.org/licenses/">Apache License</license>
+ <notes>
+initial release
+ </notes>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <dir name="Services">
+    <dir name="OAuthUploader">
+     <file name="Exception.php" role="php" />
+     <file name="ImglyUploader.php" role="php" />
+     <file name="PlixiUploader.php" role="php" />
+     <file name="TwippleUploader.php" role="php" />
+     <file name="TwitgooUploader.php" role="php" />
+     <file name="TwitpicUploader.php" role="php" />
+     <file name="YfrogUploader.php" role="php" />
+    </dir> <!-- /Services/OAuthUploader -->
+    <file name="OAuthUploader.php" role="php" />
+   </dir> <!-- /Services -->
+   <dir name="tests">
+    <dir name="Services">
+     <dir name="OAuthUploader">
+      <file name="ImglyTest.php" role="php" />
+      <file name="OAuthUploaderBaseTest.php" role="php" />
+      <file name="PlixiTest.php" role="php" />
+      <file name="TwippleTest.php" role="php" />
+      <file name="TwitgooTest.php" role="php" />
+      <file name="TwitpicTest.php" role="php" />
+      <file name="YfrogTest.php" role="php" />
+     </dir> <!-- /tests/Services/OAuthUploader -->
+    </dir> <!-- /tests/Services -->
+   </dir> <!-- /tests -->
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0a12</min>
+   </pearinstaller>
+   <package>
+    <name>PEAR</name>
+    <channel>pear.php.net</channel>
+    <min>1.4.0</min>
+   </package>
+   <package>
+    <name>HTTP_Request2</name>
+    <channel>pear.php.net</channel>
+   </package>
+   <package>
+    <name>HTTP_OAuth</name>
+    <channel>pear.php.net</channel>
+    <min>0.1.7</min>
+   </package>
+   <extension>
+    <name>json</name>
+   </extension>
+   <extension>
+    <name>simplexml</name>
+   </extension>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>0.1.0</release>
+    <api>0.1.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2010-12-25</date>
+   <license uri="http://www.apache.org/licenses/">Apache License</license>
+   <notes>
+initial release
+   </notes>
+  </release>
+ </changelog>
+</package>
