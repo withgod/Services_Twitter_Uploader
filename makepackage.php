@@ -20,11 +20,9 @@ $packagexml->setOptions(array(
         'README',
         'LICENSE',
         'tests/reports/',
-        'src/',
     ),
     'dir_roles'         => array(
         './tests' => 'test',
-        './src'   => 'php',
     ),
 
 ));

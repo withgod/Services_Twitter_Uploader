@@ -9,11 +9,11 @@
     verbose="true"
     strict="true">
     <php>
-        <includePath>../src</includePath>
+        <includePath>../</includePath>
     </php>
     <filter>
         <whitelist>
-			<directory suffix=".php">../src/Services</directory>
+			<directory suffix=".php">../Services</directory>
         </whitelist>
     </filter>
     <logging>
