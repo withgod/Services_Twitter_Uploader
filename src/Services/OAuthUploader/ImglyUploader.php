@@ -40,7 +40,7 @@ require_once 'Services/OAuthUploader.php';
  * @link      http://img.ly/api/docs
  * @see       HTTP_Request2
  */
-class Services_ImglyUploader extends Services_OAuthUploader
+class Services_OAuthUploader_ImglyUploader extends Services_OAuthUploader
 {
 
     /**

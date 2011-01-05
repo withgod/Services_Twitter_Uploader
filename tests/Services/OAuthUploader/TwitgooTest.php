@@ -34,7 +34,7 @@ require_once 'Services/OAuthUploader/OAuthUploaderBaseTest.php';
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @link      https://github.com/withgod/Services_OAuthUploader
  */
-class Services_TwitgooUploaderTest extends Services_OAuthUploaderBaseTest {
+class Services_OAuthUploader_TwitgooUploaderTest extends Services_OAuthUploader_OAuthUploaderBaseTest {
     protected $resultRegex = '/^http:\/\/twitgoo\.com\/[a-zA-Z0-9]{6}$/';
 }
 

@@ -34,7 +34,7 @@ require_once 'Services/OAuthUploader/OAuthUploaderBaseTest.php';
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @link      https://github.com/withgod/Services_OAuthUploader
  */
-class Services_TwitpicUploaderTest extends Services_OAuthUploaderBaseTest {
+class Services_OAuthUploader_TwitpicUploaderTest extends Services_OAuthUploader_OAuthUploaderBaseTest {
     protected $apiKey      = '4e38bcf446cab3c234e6fd9452aa9ee2';
     protected $resultRegex = '/^http:\/\/twitpic\.com\/[a-zA-Z0-9]{6}$/';
 }

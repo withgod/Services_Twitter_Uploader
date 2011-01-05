@@ -38,12 +38,12 @@ class Framework_AllTests
 	{
 		$suite = new PHPUnit_Framework_TestSuite('OAuthUploader AllTestSuite');
 
-		$suite->addTestSuite('Services_TwippleUploaderTest');
-		$suite->addTestSuite('Services_YfrogUploaderTest');
-		$suite->addTestSuite('Services_TwitpicUploaderTest');
-		$suite->addTestSuite('Services_PlixiUploaderTest');
-		$suite->addTestSuite('Services_TwitgooUploaderTest');
-		$suite->addTestSuite('Services_ImglyUploaderTest');
+		$suite->addTestSuite('Services_OAuthUploader_TwippleUploaderTest');
+		$suite->addTestSuite('Services_OAuthUploader_YfrogUploaderTest');
+		$suite->addTestSuite('Services_OAuthUploader_TwitpicUploaderTest');
+		$suite->addTestSuite('Services_OAuthUploader_PlixiUploaderTest');
+		$suite->addTestSuite('Services_OAuthUploader_TwitgooUploaderTest');
+		$suite->addTestSuite('Services_OAuthUploader_ImglyUploaderTest');
 
 		return $suite;
 	}

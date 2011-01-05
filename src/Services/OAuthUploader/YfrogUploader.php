@@ -41,7 +41,7 @@ require_once 'Services/OAuthUploader.php';
  * @link      http://code.google.com/p/imageshackapi/wiki/TwitterAuthentication
  * @see       HTTP_Request2
  */
-class Services_YfrogUploader extends Services_OAuthUploader
+class Services_OAuthUploader_YfrogUploader extends Services_OAuthUploader
 {
 
     /**

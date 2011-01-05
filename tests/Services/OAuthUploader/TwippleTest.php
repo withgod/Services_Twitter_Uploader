@@ -34,7 +34,7 @@ require_once 'Services/OAuthUploader/OAuthUploaderBaseTest.php';
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @link      https://github.com/withgod/Services_OAuthUploader
  */
-class Services_TwippleUploaderTest extends Services_OAuthUploaderBaseTest {
+class Services_OAuthUploader_TwippleUploaderTest extends Services_OAuthUploader_OAuthUploaderBaseTest {
     protected $resultRegex = '/^http:\/\/p\.twipple\.jp\/[a-zA-Z0-9]{5}$/';
 }
 

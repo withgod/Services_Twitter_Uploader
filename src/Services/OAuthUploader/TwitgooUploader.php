@@ -40,7 +40,7 @@ require_once 'Services/OAuthUploader.php';
  * @link      http://twitgoo.com/a/help
  * @see       HTTP_Request2
  */
-class Services_TwitgooUploader extends Services_OAuthUploader
+class Services_OAuthUploader_TwitgooUploader extends Services_OAuthUploader
 {
 
     /**

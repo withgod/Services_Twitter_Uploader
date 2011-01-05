@@ -40,7 +40,7 @@ require_once 'Services/OAuthUploader.php';
  * @link      http://dev.twitpic.com/
  * @see       HTTP_Request2
  */
-class Services_TwitpicUploader extends Services_OAuthUploader
+class Services_OAuthUploader_TwitpicUploader extends Services_OAuthUploader
 {
 
     /**

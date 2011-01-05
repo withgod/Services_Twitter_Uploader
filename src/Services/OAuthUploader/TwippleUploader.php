@@ -40,7 +40,7 @@ require_once 'Services/OAuthUploader.php';
  * @link      http://p.twipple.jp/api.php
  * @see       HTTP_Request2
  */
-class Services_TwippleUploader extends Services_OAuthUploader
+class Services_OAuthUploader_TwippleUploader extends Services_OAuthUploader
 {
 
     /**

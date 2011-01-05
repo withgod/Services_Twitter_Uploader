@@ -34,7 +34,7 @@ require_once 'Services/OAuthUploader/OAuthUploaderBaseTest.php';
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @link      https://github.com/withgod/Services_OAuthUploader
  */
-class Services_PlixiUploaderTest extends Services_OAuthUploaderBaseTest {
+class Services_OAuthUploader_PlixiUploaderTest extends Services_OAuthUploader_OAuthUploaderBaseTest {
     protected $apiKey      = '6539a037-4faa-4782-ae7f-224a4d1d98e6';
     protected $resultRegex = '/^http:\/\/plixi\.com\/p\/\d{8}$/';
 }

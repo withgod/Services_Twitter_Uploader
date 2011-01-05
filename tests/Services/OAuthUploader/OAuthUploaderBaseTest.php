@@ -45,7 +45,7 @@ require_once 'Services/OAuthUploader/YfrogUploader.php';
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @link      https://github.com/withgod/Services_OAuthUploader
  */
-class Services_OAuthUploaderBaseTest extends PHPUnit_Framework_TestCase {
+class Services_OAuthUploader_OAuthUploaderBaseTest extends PHPUnit_Framework_TestCase {
     protected $oauth       = null;
     protected $testAt      = null;
     protected $uploadUrl   = 'null';
@@ -61,7 +61,7 @@ class Services_OAuthUploaderBaseTest extends PHPUnit_Framework_TestCase {
                         '222492812-2j7GRaAcKQhkNKgrpN6cQGRdd52blsbHzLKQE594', 'UdSZh5ScU58UahBojEyc1zQK5AVk1TAQDsRX97lvTRY'
                         );
         $this->testAt = date(DATE_RFC822);
-        preg_match('/Services_([a-zA-Z]+)UploaderTest$/', get_class($this), $matches);
+        preg_match('/Services_OAuthUploader_([a-zA-Z]+)UploaderTest$/', get_class($this), $matches);
         $this->service = $matches[1];
     }
 

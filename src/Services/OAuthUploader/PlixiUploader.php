@@ -41,7 +41,7 @@ require_once 'Services/OAuthUploader.php';
  * @link      https://admin.plixi.com/Api.aspx
  * @see       HTTP_Request2
  */
-class Services_PlixiUploader extends Services_OAuthUploader
+class Services_OAuthUploader_PlixiUploader extends Services_OAuthUploader
 {
 
     /**
