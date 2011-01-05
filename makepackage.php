@@ -55,6 +55,8 @@ $packagexml->setChannel('__uri');
 $packagexml->setAPIVersion('0.1.0');
 $packagexml->setReleaseVersion('0.1.0');
 
+$packagexml->addGlobalReplacement('package-info', '@package_version@', 'version');
+
 $packagexml->setReleaseStability('alpha');
 $packagexml->setAPIStability('alpha');
 

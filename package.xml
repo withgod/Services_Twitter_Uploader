@@ -30,8 +30,8 @@ http://sakura.withgod.jp/hudson/
   <email>noname@withgod.jp</email>
   <active>yes</active>
  </lead>
- <date>2010-12-25</date>
- <time>03:31:19</time>
+ <date>2011-01-05</date>
+ <time>14:27:21</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -48,26 +48,56 @@ initial release
   <dir baseinstalldir="/" name="/">
    <dir name="Services">
     <dir name="OAuthUploader">
-     <file name="Exception.php" role="php" />
-     <file name="ImglyUploader.php" role="php" />
-     <file name="PlixiUploader.php" role="php" />
-     <file name="TwippleUploader.php" role="php" />
-     <file name="TwitgooUploader.php" role="php" />
-     <file name="TwitpicUploader.php" role="php" />
-     <file name="YfrogUploader.php" role="php" />
+     <file name="Exception.php" role="php">
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
+     <file name="ImglyUploader.php" role="php">
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
+     <file name="PlixiUploader.php" role="php">
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
+     <file name="TwippleUploader.php" role="php">
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
+     <file name="TwitgooUploader.php" role="php">
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
+     <file name="TwitpicUploader.php" role="php">
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
+     <file name="YfrogUploader.php" role="php">
+      <tasks:replace from="@package_version@" to="version" type="package-info" />
+     </file>
     </dir> <!-- /Services/OAuthUploader -->
-    <file name="OAuthUploader.php" role="php" />
+    <file name="OAuthUploader.php" role="php">
+     <tasks:replace from="@package_version@" to="version" type="package-info" />
+    </file>
    </dir> <!-- /Services -->
    <dir name="tests">
     <dir name="Services">
      <dir name="OAuthUploader">
-      <file name="ImglyTest.php" role="php" />
-      <file name="OAuthUploaderBaseTest.php" role="php" />
-      <file name="PlixiTest.php" role="php" />
-      <file name="TwippleTest.php" role="php" />
-      <file name="TwitgooTest.php" role="php" />
-      <file name="TwitpicTest.php" role="php" />
-      <file name="YfrogTest.php" role="php" />
+      <file name="ImglyTest.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file name="OAuthUploaderBaseTest.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file name="PlixiTest.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file name="TwippleTest.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file name="TwitgooTest.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file name="TwitpicTest.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file name="YfrogTest.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
      </dir> <!-- /tests/Services/OAuthUploader -->
     </dir> <!-- /tests/Services -->
    </dir> <!-- /tests -->
@@ -114,7 +144,7 @@ initial release
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2010-12-25</date>
+   <date>2011-01-05</date>
    <license uri="http://www.apache.org/licenses/">Apache License</license>
    <notes>
 initial release

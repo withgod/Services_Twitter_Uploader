@@ -21,7 +21,7 @@
  * @package   Services_OAuthUploader
  * @author    withgod <noname@withgod.jp>
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version   0.1.0
+ * @version   Release: @package_version@
  * @link      https://github.com/withgod/Services_OAuthUploader
  */
 
@@ -35,7 +35,7 @@ require_once 'Services/OAuthUploader.php';
  * @package   Services_OAuthUploader
  * @author    withgod <noname@withgod.jp>
  * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version   0.1.0
+ * @version   Release: @package_version@
  * @link      https://github.com/withgod/Services_OAuthUploader
  * @link      http://plixi.com/api
  * @link      https://admin.plixi.com/Api.aspx
