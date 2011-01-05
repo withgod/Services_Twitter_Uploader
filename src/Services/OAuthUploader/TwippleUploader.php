@@ -49,22 +49,6 @@ class Services_TwippleUploader extends Services_OAuthUploader
      */
     protected $uploadUrl = "http://p.twipple.jp/api/upload";
 
-
-    /**
-     * Constructor
-     *
-     * @see HTTP_OAuth_Consumer
-     * @see HTTP_Request2
-     * @param HTTP_OAuth_Consumer $oauth
-     * @param string $apiKey not required
-     * @param HTTP_Request2 $request
-     */
-    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null)
-    {
-        parent::__construct($oauth, $apiKey, $request);
-    }
-
-
     /**
      * preUpload implementation
      */

@@ -83,8 +83,8 @@ class Services_TwitpicUploader extends Services_OAuthUploader
             throw new Services_OAuthUploader_Exception('cannot open file ' . $this->postFile);
         }
         $this->request->setHeader( array(
-                                'X-Auth-Service-Provider'            => self::TWITTER_VERIFY_CREDENTIALS_JSON,
-                                'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(self::TWITTER_VERIFY_CREDENTIALS_JSON),
+            'X-Auth-Service-Provider'            => self::TWITTER_VERIFY_CREDENTIALS_JSON,
+            'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(self::TWITTER_VERIFY_CREDENTIALS_JSON),
         ));
     }
 

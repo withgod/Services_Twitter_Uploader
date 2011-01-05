@@ -50,21 +50,6 @@ class Services_TwitgooUploader extends Services_OAuthUploader
     protected $uploadUrl = "http://twitgoo.com/api/uploadAndPost";
 
     /**
-     * Constructor
-     *
-     * @see HTTP_OAuth_Consumer
-     * @see HTTP_Request2
-     * @param HTTP_OAuth_Consumer $oauth
-     * @param string $apiKey required
-     * @param HTTP_Request2 $request
-     * @throws Services_OAuthUploader_Exception
-     */
-    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null)
-    {
-        parent::__construct($oauth, $apiKey, $request);
-    }
-
-    /**
      * preUpload implementation
      */
     protected function preUpload()
@@ -80,8 +65,8 @@ class Services_TwitgooUploader extends Services_OAuthUploader
             throw new Services_OAuthUploader_Exception('cannot open file ' . $this->postFile);
         }
         $this->request->setHeader( array(
-                                'X-Auth-Service-Provider'            => self::TWITTER_VERIFY_CREDENTIALS_JSON,
-                                'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(self::TWITTER_VERIFY_CREDENTIALS_JSON),
+            'X-Auth-Service-Provider'            => self::TWITTER_VERIFY_CREDENTIALS_JSON,
+            'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(self::TWITTER_VERIFY_CREDENTIALS_JSON),
         ));
     }
 

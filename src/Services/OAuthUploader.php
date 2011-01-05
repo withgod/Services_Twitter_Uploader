@@ -130,7 +130,7 @@ abstract class Services_OAuthUploader
      * @param string $apiKey
      * @param HTTP_Request2 $request
      */
-    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null)
+    function __construct(HTTP_OAuth_Consumer $oauth = null, $apiKey = null, HTTP_Request2 $request = null)
     {
         $this->oauth = $oauth;
         $this->apiKey = $apiKey;
@@ -258,7 +258,8 @@ abstract class Services_OAuthUploader
      *
      * @return object {@link Services_OAuthUploader}
      */
-    public static function factory($serviceName, $oauth, $apiKey = null, $request = null)
+    public static function factory($serviceName, HTTP_OAuth_Consumer $oauth,
+        $apiKey = null, HTTP_Request2 $request = null)
     {
         $lc = strtolower($serviceName);
         if (in_array($lc, self::$services)) {

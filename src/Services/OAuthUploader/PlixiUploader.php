@@ -84,8 +84,8 @@ class Services_PlixiUploader extends Services_OAuthUploader
             throw new Services_OAuthUploader_Exception('cannot open file ' . $this->postFile);
         }
         $this->request->setHeader( array(
-                                'X-Auth-Service-Provider'            => self::TWITTER_VERIFY_CREDENTIALS_XML,
-                                'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(self::TWITTER_VERIFY_CREDENTIALS_XML),
+            'X-Auth-Service-Provider'            => self::TWITTER_VERIFY_CREDENTIALS_XML,
+            'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(self::TWITTER_VERIFY_CREDENTIALS_XML),
         ));
     }
 
