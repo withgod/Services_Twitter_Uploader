@@ -1,4 +1,4 @@
-<?
+<?php
 // vim: ts=4:sw=4:sts=4:ff=unix:fenc=utf-8:et
 /**
  * An abstract interface for OAuthUploader Services
@@ -17,12 +17,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @category  Services
- * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp>
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version   Release: @package_version@
- * @link      https://github.com/withgod/Services_OAuthUploader
+ * @category Services
+ * @package  Services_OAuthUploader
+ * @author   withgod <noname@withgod.jp>
+ * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
+ * @version  Release: @package_version@
+ * @link     https://github.com/withgod/Services_OAuthUploader
  */
 
 
@@ -31,14 +31,15 @@ require_once 'PEAR/Exception.php';
 /**
  * Base exception for the {@link Services_OAuthUploader} package
  *
- * @category  Services
- * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp>
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @link      https://github.com/withgod/Services_OAuthUploader
- * @see       PEAR_Exception
+ * @category Services
+ * @package  Services_OAuthUploader
+ * @author   withgod <noname@withgod.jp>
+ * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
+ * @link     https://github.com/withgod/Services_OAuthUploader
+ * @see      PEAR_Exception
  */
-class Services_OAuthUploader_Exception extends PEAR_Exception {
+class Services_OAuthUploader_Exception extends PEAR_Exception
+{
 }
 
 ?>

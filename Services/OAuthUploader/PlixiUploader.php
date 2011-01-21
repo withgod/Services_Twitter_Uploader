@@ -17,12 +17,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @category  Services
- * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp>
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version   Release: @package_version@
- * @link      https://github.com/withgod/Services_OAuthUploader
+ * @category Services
+ * @package  Services_OAuthUploader
+ * @author   withgod <noname@withgod.jp>
+ * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
+ * @version  Release: @package_version@
+ * @link     https://github.com/withgod/Services_OAuthUploader
  */
 
 require_once 'HTTP/Request2.php';
@@ -31,15 +31,15 @@ require_once 'Services/OAuthUploader.php';
 /**
  * implementation OAuthUploader Services
  *
- * @category  Services
- * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp>
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version   Release: @package_version@
- * @link      https://github.com/withgod/Services_OAuthUploader
- * @link      http://plixi.com/api
- * @link      https://admin.plixi.com/Api.aspx
- * @see       HTTP_Request2
+ * @category Services
+ * @package  Services_OAuthUploader
+ * @author   withgod <noname@withgod.jp>
+ * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
+ * @version  Release: @package_version@
+ * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     http://plixi.com/api
+ * @link     https://admin.plixi.com/Api.aspx
+ * @see      HTTP_Request2
  */
 class Services_OAuthUploader_PlixiUploader extends Services_OAuthUploader
 {
@@ -53,11 +53,12 @@ class Services_OAuthUploader_PlixiUploader extends Services_OAuthUploader
     /**
      * Constructor
      *
+     * @param HTTP_OAuth_Consumer $oauth   oauth consumer
+     * @param string              $apiKey  required
+     * @param HTTP_Request2       $request http provider
+     *
      * @see HTTP_OAuth_Consumer
      * @see HTTP_Request2
-     * @param HTTP_OAuth_Consumer $oauth
-     * @param string $apiKey required
-     * @param HTTP_Request2 $request
      * @throws Services_OAuthUploader_Exception
      */
     function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null)
@@ -83,14 +84,18 @@ class Services_OAuthUploader_PlixiUploader extends Services_OAuthUploader
         } catch (HTTP_Request2_Exception $e) {
             throw new Services_OAuthUploader_Exception('cannot open file ' . $this->postFile);
         }
-        $this->request->setHeader( array(
-            'X-Auth-Service-Provider'            => self::TWITTER_VERIFY_CREDENTIALS_XML,
-            'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(self::TWITTER_VERIFY_CREDENTIALS_XML),
-        ));
+        $this->request->setHeader(
+            array(
+                'X-Auth-Service-Provider'            => self::TWITTER_VERIFY_CREDENTIALS_XML,
+                'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(self::TWITTER_VERIFY_CREDENTIALS_XML)
+            )
+        );
     }
 
     /**
      * postUpload implementation
+     *
+     * @return string|null image url
      */
     protected function postUpload()
     {

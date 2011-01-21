@@ -17,12 +17,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @category  Services
- * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp>
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version   Release: @package_version@
- * @link      https://github.com/withgod/Services_OAuthUploader
+ * @category Services
+ * @package  Services_OAuthUploader
+ * @author   withgod <noname@withgod.jp>
+ * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
+ * @version  Release: @package_version@
+ * @link     https://github.com/withgod/Services_OAuthUploader
  */
 
 require_once 'HTTP/Request2.php';
@@ -31,14 +31,14 @@ require_once 'Services/OAuthUploader.php';
 /**
  * implementation OAuthUploader Services
  *
- * @category  Services
- * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp>
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version   Release: @package_version@
- * @link      https://github.com/withgod/Services_OAuthUploader
- * @link      http://p.twipple.jp/api.php
- * @see       HTTP_Request2
+ * @category Services
+ * @package  Services_OAuthUploader
+ * @author   withgod <noname@withgod.jp>
+ * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
+ * @version  Release: @package_version@
+ * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     http://p.twipple.jp/api.php
+ * @see      HTTP_Request2
  */
 class Services_OAuthUploader_TwippleUploader extends Services_OAuthUploader
 {
@@ -64,6 +64,8 @@ class Services_OAuthUploader_TwippleUploader extends Services_OAuthUploader
 
     /**
      * postUpload implementation
+     *
+     * @return string|null image url
      */
     protected function postUpload()
     {
