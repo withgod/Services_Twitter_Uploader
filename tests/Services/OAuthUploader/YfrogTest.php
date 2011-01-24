@@ -36,7 +36,7 @@ require_once 'Services/OAuthUploader/OAuthUploaderBaseTest.php';
  */
 class Services_OAuthUploader_YfrogUploaderTest extends Services_OAuthUploader_OAuthUploaderBaseTest
 {
-    protected $resultRegex = '/^http:\/\/yfrog\.com\/[a-zA-Z0-9]{6,20}$/';
+    protected $resultRegex = '/^http:\/\/yfrog\.com\/[a-zA-Z0-9]{6,25}$/';
 }
 
 ?>
