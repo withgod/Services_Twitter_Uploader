@@ -31,6 +31,9 @@ require_once 'Services/OAuthUploader/TwippleTest.php';
 require_once 'Services/OAuthUploader/TwitgooTest.php';
 require_once 'Services/OAuthUploader/TwitpicTest.php';
 require_once 'Services/OAuthUploader/YfrogTest.php';
+require_once 'Services/OAuthUploader/MobypictureTest.php';
+require_once 'Services/OAuthUploader/TwiplTest.php';
+require_once 'Services/OAuthUploader/PosterousTest.php';
 
 /**
  * TestRunner
@@ -51,6 +54,9 @@ class Framework_AllTests
         $suite->addTestSuite('Services_OAuthUploader_PlixiUploaderTest');
         $suite->addTestSuite('Services_OAuthUploader_TwitgooUploaderTest');
         $suite->addTestSuite('Services_OAuthUploader_ImglyUploaderTest');
+        $suite->addTestSuite('Services_OAuthUploader_MobypictureUploaderTest');
+        $suite->addTestSuite('Services_OAuthUploader_PosterousUploaderTest');
+        $suite->addTestSuite('Services_OAuthUploader_TwiplUploaderTest');
 
         return $suite;
     }
