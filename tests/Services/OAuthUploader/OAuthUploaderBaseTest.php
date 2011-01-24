@@ -15,12 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @category  Services
- * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp>
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version   Release: @package_version@
- * @link      https://github.com/withgod/Services_OAuthUploader
+ * @category Services
+ * @package  Services_OAuthUploader
+ * @author   withgod <noname@withgod.jp>
+ * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
+ * @version  Release: @package_version@
+ * @link     https://github.com/withgod/Services_OAuthUploader
  */
 
 require_once 'PHPUnit/Autoload.php';
@@ -39,13 +39,14 @@ require_once 'Services/OAuthUploader/YfrogUploader.php';
 /**
  * Test of Services_OAuthUploader BaseClass
  *
- * @category  Services
- * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp>
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @link      https://github.com/withgod/Services_OAuthUploader
+ * @category Services
+ * @package  Services_OAuthUploader
+ * @author   withgod <noname@withgod.jp>
+ * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
+ * @link     https://github.com/withgod/Services_OAuthUploader
  */
-class Services_OAuthUploader_OAuthUploaderBaseTest extends PHPUnit_Framework_TestCase {
+class Services_OAuthUploader_OAuthUploaderBaseTest extends PHPUnit_Framework_TestCase
+{
     protected $oauth       = null;
     protected $testAt      = null;
     protected $uploadUrl   = 'null';
@@ -55,7 +56,8 @@ class Services_OAuthUploader_OAuthUploaderBaseTest extends PHPUnit_Framework_Tes
 
     protected $apiKey  = null;
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->oauth = new HTTP_OAuth_Consumer(
                         'E5uLlSrSnCFvRaktibfbJQ', 'ZYlRHjkJK4Ts7HzgoSJqRJTwEfJgazswoaRSxoWkjF0',
                         '222492812-2j7GRaAcKQhkNKgrpN6cQGRdd52blsbHzLKQE594', 'UdSZh5ScU58UahBojEyc1zQK5AVk1TAQDsRX97lvTRY'
@@ -65,7 +67,8 @@ class Services_OAuthUploader_OAuthUploaderBaseTest extends PHPUnit_Framework_Tes
         $this->service = $matches[1];
     }
 
-    public function testInitialze() {
+    public function testInitialze()
+    {
         $isFailure = false;
         try {
             $tmp = Services_OAuthUploader::factory('fizzbuzz', $this->oauth);
@@ -91,7 +94,8 @@ class Services_OAuthUploader_OAuthUploaderBaseTest extends PHPUnit_Framework_Tes
     /**
      * @depends testInitialze
      */
-    public function testUpload($uploader) {
+    public function testUpload($uploader)
+    {
         $url = $uploader->upload($this->uploadFile, 'Services_OAuthUploader' . $this->testAt);
         $this->uploadUrl = $url;
         $this->assertTrue(is_string($url), 'uploaded url variable is no string [' . $url . ']');
@@ -102,8 +106,9 @@ class Services_OAuthUploader_OAuthUploaderBaseTest extends PHPUnit_Framework_Tes
      * @depends testInitialze
      * @expectedException Services_OAuthUploader_Exception
      */
-    public function testUploadNG($uploader) {
-       $fname =  './filenotexists' . getmypid() . '.jpg';
+    public function testUploadNG($uploader)
+    {
+        $fname =  './filenotexists' . getmypid() . '.jpg';
         if (!is_readable($fname)) {
             $url = $uploader->upload($fname);
         }

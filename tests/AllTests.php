@@ -15,15 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * @category  Services
- * @package   Services_OAuthUploader
- * @author    withgod <noname@withgod.jp>
- * @license   http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version   Release: @package_version@
- * @link      https://github.com/withgod/Services_OAuthUploader
+ * @category Services
+ * @package  Services_OAuthUploader
+ * @author   withgod <noname@withgod.jp>
+ * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
+ * @version  Release: @package_version@
+ * @link     https://github.com/withgod/Services_OAuthUploader
  */
 
-require_once('PHPUnit/Autoload.php');
+require_once 'PHPUnit/Autoload.php';
 
 require_once 'Services/OAuthUploader/ImglyTest.php';
 require_once 'Services/OAuthUploader/PlixiTest.php';
@@ -32,19 +32,26 @@ require_once 'Services/OAuthUploader/TwitgooTest.php';
 require_once 'Services/OAuthUploader/TwitpicTest.php';
 require_once 'Services/OAuthUploader/YfrogTest.php';
 
+/**
+ * TestRunner
+ *
+ * @author  withgod <noname@withgod.jp>
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License
+ * @link    https://github.com/withgod/Services_OAuthUploader
+ */
 class Framework_AllTests
 {
-	public static function suite()
-	{
-		$suite = new PHPUnit_Framework_TestSuite('OAuthUploader AllTestSuite');
+    public static function suite()
+    {
+        $suite = new PHPUnit_Framework_TestSuite('OAuthUploader AllTestSuite');
 
-		$suite->addTestSuite('Services_OAuthUploader_TwippleUploaderTest');
-		$suite->addTestSuite('Services_OAuthUploader_YfrogUploaderTest');
-		$suite->addTestSuite('Services_OAuthUploader_TwitpicUploaderTest');
-		$suite->addTestSuite('Services_OAuthUploader_PlixiUploaderTest');
-		$suite->addTestSuite('Services_OAuthUploader_TwitgooUploaderTest');
-		$suite->addTestSuite('Services_OAuthUploader_ImglyUploaderTest');
+        $suite->addTestSuite('Services_OAuthUploader_TwippleUploaderTest');
+        $suite->addTestSuite('Services_OAuthUploader_YfrogUploaderTest');
+        $suite->addTestSuite('Services_OAuthUploader_TwitpicUploaderTest');
+        $suite->addTestSuite('Services_OAuthUploader_PlixiUploaderTest');
+        $suite->addTestSuite('Services_OAuthUploader_TwitgooUploaderTest');
+        $suite->addTestSuite('Services_OAuthUploader_ImglyUploaderTest');
 
-		return $suite;
-	}
+        return $suite;
+    }
 }
