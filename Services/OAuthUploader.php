@@ -57,7 +57,10 @@ abstract class Services_OAuthUploader
         'twipple',
         'twitgoo',
         'twitpic',
-        'yfrog'
+        'yfrog',
+        'mobypicture',
+        'twipl',
+        'posterous'
     );
 
     /**

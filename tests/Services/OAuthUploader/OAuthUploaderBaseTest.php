@@ -35,6 +35,9 @@ require_once 'Services/OAuthUploader/TwippleUploader.php';
 require_once 'Services/OAuthUploader/TwitgooUploader.php';
 require_once 'Services/OAuthUploader/TwitpicUploader.php';
 require_once 'Services/OAuthUploader/YfrogUploader.php';
+require_once 'Services/OAuthUploader/MobypictureUploader.php';
+require_once 'Services/OAuthUploader/TwiplUploader.php';
+require_once 'Services/OAuthUploader/PosterousUploader.php';
 
 /**
  * Test of Services_OAuthUploader BaseClass
