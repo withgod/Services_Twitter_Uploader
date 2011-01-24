@@ -45,7 +45,7 @@ class Services_OAuthUploader_TwippleUploader extends Services_OAuthUploader
 
     /**
      * upload endpoint
-     * @var string upload endpoint
+     * @var string
      */
     protected $uploadUrl = "http://p.twipple.jp/api/upload";
 

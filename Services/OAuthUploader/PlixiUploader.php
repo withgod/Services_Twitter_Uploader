@@ -46,7 +46,7 @@ class Services_OAuthUploader_PlixiUploader extends Services_OAuthUploader
 
     /**
      * upload endpoint
-     * @var string upload endpoint
+     * @var string
      */
     protected $uploadUrl = "http://tweetphotoapi.com/api/upload.aspx";
 

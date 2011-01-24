@@ -45,7 +45,7 @@ class Services_OAuthUploader_ImglyUploader extends Services_OAuthUploader
 
     /**
      * upload endpoint
-     * @var string upload endpoint
+     * @var string
      */
     protected $uploadUrl = "http://img.ly/api/2/upload.json";
 

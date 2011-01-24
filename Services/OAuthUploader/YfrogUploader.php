@@ -46,7 +46,7 @@ class Services_OAuthUploader_YfrogUploader extends Services_OAuthUploader
 
     /**
      * upload endpoint
-     * @var string upload endpoint
+     * @var string
      */
     protected $uploadUrl = "https://yfrog.com/api/upload";
 

@@ -49,8 +49,7 @@ abstract class Services_OAuthUploader
 
     /**
      * List of supported services
-     *
-     * @var array $services support service array
+     * @var array $services
      */
     static protected $services = array(
         'imgly',
@@ -63,31 +62,24 @@ abstract class Services_OAuthUploader
 
     /**
      * service api key(some services required)
-     *
-     * @var string api key
+     * @var string
      */
     protected $apiKey = null;
 
 
     /**
-     * oauth instance
-     *
      * @see HTTP_OAuth_Consumer
      * @var HTTP_OAuth_Consumer oauth consumer object
      */
     protected $oauth = null;
 
     /**
-     * upload endpoint url
-     *
      * @var string upload endpoint
      */
     protected $uploadUrl = null;
 
 
     /**
-     * event of upload time exception
-     *
      * @see HTTP_Request2_Exception
      * @var HTTP_Request2_Exception event of upload time exception
      */
@@ -95,29 +87,26 @@ abstract class Services_OAuthUploader
 
     /**
      * upload file path
-     *
-     * @var string upload file path
+     * @var string
      */
     protected $postFile = null;
 
     /**
      * post message
-     * @var string post message
+     * @var string
      */
     protected $postMessage = null;
 
     /**
-     * upload request object
      * @see HTTP_Request2
-     * @var HTTP_Request2
+     * @var HTTP_Request2 upload request object
      */
     protected $request = null;
 
 
     /**
-     * upload response object
      * @see HTTP_Request2_Response
-     * @var HTTP_Request2_Response
+     * @var HTTP_Request2_Response upload response object
      */
     protected $response = null;
 

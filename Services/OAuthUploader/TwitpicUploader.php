@@ -45,7 +45,7 @@ class Services_OAuthUploader_TwitpicUploader extends Services_OAuthUploader
 
     /**
      * upload endpoint
-     * @var string upload endpoint
+     * @var string
      */
     protected $uploadUrl = "https://twitpic.com/api/2/upload.json";
 
