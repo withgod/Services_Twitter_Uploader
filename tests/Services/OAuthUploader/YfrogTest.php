@@ -1,5 +1,4 @@
 <?php
-// vim: ts=4:sw=4:sts=4:ff=unix:fenc=utf-8:et
 /**
  * PHP version 5.2.0+
  *
