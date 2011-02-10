@@ -274,6 +274,8 @@ abstract class Services_OAuthUploader
     /**
      * extends classes should implments this method.
      * see other implmention classes
+     *
+     * @return void
      */
     abstract protected function preUpload();
 

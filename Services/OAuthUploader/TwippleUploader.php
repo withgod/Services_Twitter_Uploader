@@ -50,6 +50,8 @@ class Services_OAuthUploader_TwippleUploader extends Services_OAuthUploader
 
     /**
      * preUpload implementation
+     *
+     * @return void
      */
     protected function preUpload()
     {

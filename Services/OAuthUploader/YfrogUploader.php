@@ -51,6 +51,8 @@ class Services_OAuthUploader_YfrogUploader extends Services_OAuthUploader
 
     /**
      * preUpload implementation
+     *
+     * @return void
      */
     protected function preUpload()
     {

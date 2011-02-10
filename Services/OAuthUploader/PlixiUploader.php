@@ -70,6 +70,8 @@ class Services_OAuthUploader_PlixiUploader extends Services_OAuthUploader
 
     /**
      * preUpload implementation
+     *
+     * @return void
      */
     protected function preUpload()
     {

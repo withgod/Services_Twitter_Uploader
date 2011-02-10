@@ -69,6 +69,8 @@ class Services_OAuthUploader_TwitpicUploader extends Services_OAuthUploader
 
     /**
      * preUpload implementation
+     *
+     * @return void
      */
     protected function preUpload()
     {

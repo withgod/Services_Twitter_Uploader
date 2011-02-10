@@ -50,6 +50,8 @@ class Services_OAuthUploader_TwitgooUploader extends Services_OAuthUploader
 
     /**
      * preUpload implementation
+     *
+     * @return void
      */
     protected function preUpload()
     {
