@@ -60,7 +60,7 @@ class Services_OAuthUploader_ImglyUploader extends Services_OAuthUploader
             $this->request->addPostParameter('message', $this->postMessage);
         }
         try {
-            $this->request->addUpload('media', $this->postFile);
+            $this->request->addUpload('media', $this->postFile, basename($this->postFile), 'application/octet-stream');
         } catch (HTTP_Request2_Exception $e) {
             throw new Services_OAuthUploader_Exception('cannot open file ' . $this->postFile);
         }
