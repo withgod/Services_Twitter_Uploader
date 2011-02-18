@@ -142,8 +142,8 @@ abstract class Services_OAuthUploader
      * upload method.
      * do not all provider require apikey do not supported send message.
      *
-     * @param string $filePath path to upload fie
-     * @param sting  $message  tweet
+     * @param string $filePath full path of file to upload to the service
+     * @param sting  $message  message of tweet(some uploader don't support)
      *
      * @throws {@link Services_OAuthUploader_Exception}
      *
@@ -179,8 +179,9 @@ abstract class Services_OAuthUploader
 
     /**
      * utility method.
+     * for developers method. don't use end-user
      *
-     * @param string $verify_url verify_url url
+     * @param string $verify_url Twitter's verify_credentials url. use class const variable TWITTER_VERIFY_CREDENTIALS_JSON or XML
      *
      * @return array signed parameter and signature array
      */
@@ -209,6 +210,7 @@ abstract class Services_OAuthUploader
 
     /**
      * utility method.
+     * for developers method. don't use end-user
      * if provider is in request based implemention of oauth echo. this method use
      *
      * @param string $verify_url verify_url url
@@ -229,6 +231,7 @@ abstract class Services_OAuthUploader
 
     /**
      * utility method.
+     * for developers method. don't use end-user
      * if provider is in request based implementation of oauth echo. this method use
      *
      * @param string $verify_url verify_url url
