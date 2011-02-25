@@ -1,6 +1,6 @@
 OAuth echo support uploader utility.
 
-support uploader
+Support uploader
  * imgly
  * plixi
  * twipple
@@ -11,5 +11,11 @@ support uploader
  * twipl
  * posterous
 
+Dev link
 https://github.com/withgod/Services_OAuthUploader
 http://sakura.withgod.jp/redmine/projects/s-oauthuploader
+
+Contributors
+withgod <noname@withgod.jp> @withgod
+Till Klampaeckel <till@php.net> @klimpong
+
