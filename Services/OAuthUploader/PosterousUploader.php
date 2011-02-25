@@ -20,7 +20,7 @@
  * @package  Services_OAuthUploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version  Release: @package_version@
+ * @version  GIT: $Id$
  * @link     https://github.com/withgod/Services_OAuthUploader
  */
 
@@ -62,12 +62,16 @@ class Services_OAuthUploader_PosterousUploader extends Services_OAuthUploader
         try {
             $this->request->addUpload('media', $this->postFile);
         } catch (HTTP_Request2_Exception $e) {
-            throw new Services_OAuthUploader_Exception('cannot open file ' . $this->postFile);
+            throw new Services_OAuthUploader_Exception(
+                'cannot open file ' . $this->postFile
+            );
         }
         $this->request->setHeader(
             array(
                 'X-Auth-Service-Provider'            => self::TWITTER_VERIFY_CREDENTIALS_JSON,
-                'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(self::TWITTER_VERIFY_CREDENTIALS_JSON)
+                'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(
+                    self::TWITTER_VERIFY_CREDENTIALS_JSON
+                )
             )
         );
     }
@@ -79,21 +83,14 @@ class Services_OAuthUploader_PosterousUploader extends Services_OAuthUploader
      */
     protected function postUpload()
     {
-        if (!empty($this->postException)) {
-            throw new Services_OAuthUploader_Exception($this->postException->getMessage());
-        }
-        if ($this->response->getStatus() != 200) {
-            throw new Services_OAuthUploader_Exception('invalid response status code [' . $this->response->getStatus() . ']');
-        }
-        $resp = json_decode($this->response->getBody());
+        $body = $this->postUploadCheck($this->response, 200);
+        $resp = json_decode($body);
 
         if (property_exists($resp, 'url') && !empty($resp->url)) {
             return $resp->url;
-        } else {
-            throw new Services_OAuthUploader_Exception('unKnown response [' . $this->response->getBody() . ']');
         }
-
-        return null;
+        throw new Services_OAuthUploader_Exception(
+            'unKnown response [' . $body . ']'
+        );
     }
 }
-?>

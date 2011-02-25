@@ -62,10 +62,18 @@ class Services_OAuthUploader_YfrogUploader extends Services_OAuthUploader
         } catch (HTTP_Request2_Exception $e) {
             throw new Services_OAuthUploader_Exception('cannot open file ' . $this->postFile);
         }
-        $this->request->addPostParameter('verify_url', $this->genVerifyUrl(self::TWITTER_VERIFY_CREDENTIALS_XML));
+        $this->request->addPostParameter(
+            'verify_url',
+            $this->genVerifyUrl(self::TWITTER_VERIFY_CREDENTIALS_XML)
+        );
         $this->request->addPostParameter('auth', 'oauth');
-        $verify = file_get_contents($this->genVerifyUrl(self::TWITTER_VERIFY_CREDENTIALS_XML));
-        $this->request->addPostParameter('username', (string)simplexml_load_string($verify)->screen_name);
+        $verify = file_get_contents(
+            $this->genVerifyUrl(self::TWITTER_VERIFY_CREDENTIALS_XML)
+        );
+        $this->request->addPostParameter(
+            'username',
+            (string)simplexml_load_string($verify)->screen_name
+        );
     }
 
     /**
@@ -75,20 +83,14 @@ class Services_OAuthUploader_YfrogUploader extends Services_OAuthUploader
      */
     protected function postUpload()
     {
-        if (!empty($this->postException)) {
-            throw new Services_OAuthUploader_Exception($this->postException->getMessage());
-        }
-        if ($this->response->getStatus() != 200) {
-            throw new Services_OAuthUploader_Exception('invalid response status code [' . $this->response->getStatus() . ']');
-        }
-        $resp = simplexml_load_string($this->response->getBody());
+        $body = $this->postUploadCheck($this->response, 200);
+        $resp = simplexml_load_string($body);
 
         if ($resp['stat'] == 'ok') {
             return (string)$resp->mediaurl[0];
-        } else {
-            throw new Services_OAuthUploader_Exception('invalid response code [' . $resp->err['msg'] . ']');
         }
-        return null;
+        throw new Services_OAuthUploader_Exception(
+            'invalid response code [' . $resp->err['msg'] . ']'
+        );
     }
 }
-?>

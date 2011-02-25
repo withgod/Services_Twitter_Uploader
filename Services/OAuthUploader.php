@@ -297,6 +297,37 @@ abstract class Services_OAuthUploader
     }
 
     /**
+     * This method is run in each implementation in from postUpload().
+     *
+     * @param HTTP_Request2_Response $response The response object.
+     * @param int                    $code     The expected response code.
+     *
+     * @return string The response body.
+     *
+     * @throws Services_OAuthUploader_Exception
+     * @throws Services_OAuthUploader_Exception When the response code doesn't
+     *                                          match what is expected.
+     * @uses self::$response
+     * @uses self::$postException
+     */
+    protected function postUploadCheck(HTTP_Request2_Response $response, $code)
+    {
+        if (!empty($this->postException)
+            && ($this->postException instanceof Exception)
+        ) {
+            throw new Services_OAuthUploader_Exception(
+                $this->postException->getMessage()
+            );
+        }
+        if ($response->getStatus() != $code) {
+            throw new Services_OAuthUploader_Exception(
+                'invalid response status code [' . $response->getStatus() . ']'
+            );
+        }
+        return $response->getBody();
+    }
+
+    /**
      * extending classes should implement this method.
      *
      * @return void

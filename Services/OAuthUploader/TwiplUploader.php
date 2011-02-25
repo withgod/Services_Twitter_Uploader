@@ -20,7 +20,7 @@
  * @package  Services_OAuthUploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version  Release: @package_version@
+ * @version  GIT: $Id$
  * @link     https://github.com/withgod/Services_OAuthUploader
  */
 
@@ -57,13 +57,17 @@ class Services_OAuthUploader_TwiplUploader extends Services_OAuthUploader
      *
      * @see HTTP_OAuth_Consumer
      * @see HTTP_Request2
-     * @throws Services_OAuthUploader_Exception
+     * @throws Services_OAuthUploader_Exception When no API key is provided.
      */
-    function __construct($oauth = null, $apiKey = null, HTTP_Request2 $request = null)
-    {
+    public function __construct(
+        HTTP_OAuth_Consumer $oauth = null, $apiKey = null,
+        HTTP_Request2 $request = null
+    ) {
         parent::__construct($oauth, $apiKey, $request);
         if (empty($apiKey)) {
-            throw new Services_OAuthUploader_Exception('TwiplUploader require apiKey');
+            throw new Services_OAuthUploader_Exception(
+                'TwiplUploader require apiKey'
+            );
         }
     }
 
@@ -82,12 +86,16 @@ class Services_OAuthUploader_TwiplUploader extends Services_OAuthUploader
         try {
             $this->request->addUpload('media1', $this->postFile);
         } catch (HTTP_Request2_Exception $e) {
-            throw new Services_OAuthUploader_Exception('cannot open file ' . $this->postFile);
+            throw new Services_OAuthUploader_Exception(
+                'cannot open file ' . $this->postFile
+            );
         }
         $this->request->setHeader(
             array(
                 'X-OAUTH-SP-URL'        => self::TWITTER_VERIFY_CREDENTIALS_XML,
-                'X-OAUTH-AUTHORIZATION' => $this->genVerifyHeader(self::TWITTER_VERIFY_CREDENTIALS_XML)
+                'X-OAUTH-AUTHORIZATION' => $this->genVerifyHeader(
+                    self::TWITTER_VERIFY_CREDENTIALS_XML
+                )
             )
         );
     }
@@ -99,20 +107,14 @@ class Services_OAuthUploader_TwiplUploader extends Services_OAuthUploader
      */
     protected function postUpload()
     {
-        if (!empty($this->postException)) {
-            throw new Services_OAuthUploader_Exception($this->postException->getMessage());
-        }
-        if ($this->response->getStatus() != 200) {
-            throw new Services_OAuthUploader_Exception('invalid response status code [' . $this->response->getStatus() . ']');
-        }
-        $resp = simplexml_load_string($this->response->getBody());
+        $body = $this->postUploadCheck($this->response, 200);
+        $resp = simplexml_load_string($body);
 
         if (property_exists($resp, 'mediaurl') && !empty($resp->mediaurl)) {
             return (string)$resp->mediaurl;
-        } else {
-            throw new Services_OAuthUploader_Exception('unKnown response [' . $this->response->getBody() . ']');
         }
-        return null;
+        throw new Services_OAuthUploader_Exception(
+            'unKnown response [' . $body . ']'
+        );
     }
 }
-?>

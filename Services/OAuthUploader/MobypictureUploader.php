@@ -108,23 +108,14 @@ class Services_OAuthUploader_MobypictureUploader extends Services_OAuthUploader
      */
     protected function postUpload()
     {
-        if (!empty($this->postException)) {
-            throw new Services_OAuthUploader_Exception(
-                $this->postException->getMessage()
-            );
-        }
-        if ($this->response->getStatus() != 200) {
-            throw new Services_OAuthUploader_Exception(
-                'invalid response status code [' . $this->response->getStatus() . ']'
-            );
-        }
-        $resp = json_decode($this->response->getBody());
+        $body = $this->postUploadCheck($this->response, 200);
+        $resp = json_decode($body);
 
         if (property_exists($resp, 'media') && !empty($resp->media)) {
             return $resp->media->mediaurl;
         }
         throw new Services_OAuthUploader_Exception(
-            'unKnown response [' . $this->response->getBody() . ']'
+            'unKnown response [' . $body . ']'
         );
     }
 }

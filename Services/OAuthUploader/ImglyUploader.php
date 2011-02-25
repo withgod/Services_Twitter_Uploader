@@ -91,25 +91,14 @@ class Services_OAuthUploader_ImglyUploader extends Services_OAuthUploader
      */
     protected function postUpload()
     {
-        if (!empty($this->postException)
-            && ($this->postException instanceof Exception)
-        ) {
-            throw new Services_OAuthUploader_Exception(
-                $this->postException->getMessage()
-            );
-        }
-        if ($this->response->getStatus() != 200) {
-            throw new Services_OAuthUploader_Exception(
-                'invalid response status code [' . $this->response->getStatus() . ']'
-            );
-        }
-        $resp = json_decode($this->response->getBody());
+        $body = $this->postUploadCheck($this->response, 200);
+        $resp = json_decode($body);
 
         if (property_exists($resp, 'url') && !empty($resp->url)) {
             return $resp->url;
         }
         throw new Services_OAuthUploader_Exception(
-            'unKnown response [' . $this->response->getBody() . ']'
+            'unKnown response [' . $body . ']'
         );
     }
 }
