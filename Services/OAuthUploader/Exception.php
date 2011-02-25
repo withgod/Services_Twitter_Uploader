@@ -20,7 +20,7 @@
  * @package  Services_OAuthUploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version  Release: @package_version@
+ * @version  GIT: $Id$
  * @link     https://github.com/withgod/Services_OAuthUploader
  */
 
