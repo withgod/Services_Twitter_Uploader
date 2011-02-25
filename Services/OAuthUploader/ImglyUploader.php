@@ -60,14 +60,23 @@ class Services_OAuthUploader_ImglyUploader extends Services_OAuthUploader
             $this->request->addPostParameter('message', $this->postMessage);
         }
         try {
-            $this->request->addUpload('media', $this->postFile, basename($this->postFile), 'application/octet-stream');
+            $this->request->addUpload(
+                'media',
+                $this->postFile,
+                basename($this->postFile),
+                'application/octet-stream'
+            );
         } catch (HTTP_Request2_Exception $e) {
-            throw new Services_OAuthUploader_Exception('cannot open file ' . $this->postFile);
+            throw new Services_OAuthUploader_Exception(
+                'cannot open file: ' . $this->postFile
+            );
         }
         $this->request->setHeader(
             array(
                 'X-Auth-Service-Provider'            => self::TWITTER_VERIFY_CREDENTIALS_JSON,
-                'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(self::TWITTER_VERIFY_CREDENTIALS_JSON)
+                'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(
+                    self::TWITTER_VERIFY_CREDENTIALS_JSON
+                )
             )
         );
     }
@@ -75,24 +84,32 @@ class Services_OAuthUploader_ImglyUploader extends Services_OAuthUploader
     /**
      * postUpload implementation
      *
-     * @return string | null image url
+     * @return string URL to the uploaded image.
+     *
+     * @throws Services_OAuthUploader_Exception When the response status is not 200.
+     * @throws Services_OAuthUploader_Exception On unknown response.
      */
     protected function postUpload()
     {
-        if (!empty($this->postException)) {
-            throw new Services_OAuthUploader_Exception($this->postException->getMessage());
+        if (!empty($this->postException)
+            && ($this->postException instanceof Exception)
+        ) {
+            throw new Services_OAuthUploader_Exception(
+                $this->postException->getMessage()
+            );
         }
         if ($this->response->getStatus() != 200) {
-            throw new Services_OAuthUploader_Exception('invalid response status code [' . $this->response->getStatus() . ']');
+            throw new Services_OAuthUploader_Exception(
+                'invalid response status code [' . $this->response->getStatus() . ']'
+            );
         }
         $resp = json_decode($this->response->getBody());
 
         if (property_exists($resp, 'url') && !empty($resp->url)) {
             return $resp->url;
-        } else {
-            throw new Services_OAuthUploader_Exception('unKnown response [' . $this->response->getBody() . ']');
         }
-        return null;
+        throw new Services_OAuthUploader_Exception(
+            'unKnown response [' . $this->response->getBody() . ']'
+        );
     }
 }
-?>
