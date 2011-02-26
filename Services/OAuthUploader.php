@@ -343,6 +343,7 @@ abstract class Services_OAuthUploader
     protected function setRequest(HTTP_Request2 $request)
     {
         $this->request = $request;
+        $this->request->setMethod(HTTP_Request2::METHOD_POST);
     }
 
     /**
