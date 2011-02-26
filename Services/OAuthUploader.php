@@ -294,8 +294,8 @@ abstract class Services_OAuthUploader
         if (in_array($lc, self::$services)) {
             $uc = ucwords($lc);
             include_once "Services/OAuthUploader/{$uc}Uploader.php";
-            $clazz = "Services_OAuthUploader_{$uc}Uploader";
-            return new $clazz($oauth, $apiKey,  $request);
+            $class = "Services_OAuthUploader_{$uc}Uploader";
+            return new $class($oauth, $apiKey,  $request);
         }
         throw new Services_OAuthUploader_Exception(
             'unknown service name' . $serviceName . ']'
