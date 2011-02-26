@@ -334,6 +334,30 @@ abstract class Services_OAuthUploader
     }
 
     /**
+     * set an instance of HTTP_Request2
+     *
+     * @param HTTP_Request2 $request
+     *
+     * @return void
+     */
+    protected function setRequest(HTTP_Request2 $request)
+    {
+        $this->request = $request;
+    }
+
+    /**
+     * set an instance of HTTP_OAuth_Consumer
+     *
+     * @param HTTP_OAuth_Consumer $oauth
+     *
+     * @return void
+     */
+    protected function setConsumer(HTTP_OAuth_Consumer $oauth)
+    {
+        $this->oauth = $oauth;
+    }
+
+    /**
      * extending classes should implement this method.
      *
      * @return void
