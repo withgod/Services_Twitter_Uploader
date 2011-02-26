@@ -56,13 +56,13 @@ class Services_OAuthUploader_TwippleUploader extends Services_OAuthUploader
     protected function preUpload()
     {
         try {
-            $this->request->addUpload('media', $this->postFile);
+            $this->lastRequest->addUpload('media', $this->postFile);
         } catch (HTTP_Request2_Exception $e) {
             throw new Services_OAuthUploader_Exception(
                 'cannot open file: ' . $this->postFile
             );
         }
-        $this->request->addPostParameter(
+        $this->lastRequest->addPostParameter(
             'verify_url', $this->genVerifyUrl(self::TWITTER_VERIFY_CREDENTIALS_XML)
         );
     }

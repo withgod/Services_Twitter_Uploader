@@ -80,13 +80,13 @@ class Services_OAuthUploader_PlixiUploader extends Services_OAuthUploader
      */
     protected function preUpload()
     {
-        $this->request->setConfig('ssl_verify_peer', false);
-        $this->request->addPostParameter('api_key', $this->apiKey);
+        $this->lastRequest->setConfig('ssl_verify_peer', false);
+        $this->lastRequest->addPostParameter('api_key', $this->apiKey);
         if (!empty($this->postMessage)) {
-            $this->request->addPostParameter('message', $this->postMessage);
+            $this->lastRequest->addPostParameter('message', $this->postMessage);
         }
         try {
-            $this->request->addUpload(
+            $this->lastRequest->addUpload(
                 'media',
                 $this->postFile,
                 basename($this->postFile),
@@ -97,7 +97,7 @@ class Services_OAuthUploader_PlixiUploader extends Services_OAuthUploader
                 'cannot open file ' . $this->postFile
             );
         }
-        $this->request->setHeader(
+        $this->lastRequest->setHeader(
             array(
                 'X-Auth-Service-Provider'            => self::TWITTER_VERIFY_CREDENTIALS_XML,
                 'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(

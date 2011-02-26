@@ -78,19 +78,19 @@ class Services_OAuthUploader_TwiplUploader extends Services_OAuthUploader
      */
     protected function preUpload()
     {
-        $this->request->setConfig('ssl_verify_peer', false);
-        $this->request->addPostParameter('key', $this->apiKey);
+        $this->lastRequest->setConfig('ssl_verify_peer', false);
+        $this->lastRequest->addPostParameter('key', $this->apiKey);
         if (!empty($this->postMessage)) {
-            $this->request->addPostParameter('message', $this->postMessage);
+            $this->lastRequest->addPostParameter('message', $this->postMessage);
         }
         try {
-            $this->request->addUpload('media1', $this->postFile);
+            $this->lastRequest->addUpload('media1', $this->postFile);
         } catch (HTTP_Request2_Exception $e) {
             throw new Services_OAuthUploader_Exception(
                 'cannot open file ' . $this->postFile
             );
         }
-        $this->request->setHeader(
+        $this->lastRequest->setHeader(
             array(
                 'X-OAUTH-SP-URL'        => self::TWITTER_VERIFY_CREDENTIALS_XML,
                 'X-OAUTH-AUTHORIZATION' => $this->genVerifyHeader(

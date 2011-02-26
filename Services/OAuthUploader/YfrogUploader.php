@@ -56,21 +56,21 @@ class Services_OAuthUploader_YfrogUploader extends Services_OAuthUploader
      */
     protected function preUpload()
     {
-        $this->request->setConfig('ssl_verify_peer', false);
+        $this->lastRequest->setConfig('ssl_verify_peer', false);
         try {
-            $this->request->addUpload('media', $this->postFile);
+            $this->lastRequest->addUpload('media', $this->postFile);
         } catch (HTTP_Request2_Exception $e) {
             throw new Services_OAuthUploader_Exception('cannot open file ' . $this->postFile);
         }
-        $this->request->addPostParameter(
+        $this->lastRequest->addPostParameter(
             'verify_url',
             $this->genVerifyUrl(self::TWITTER_VERIFY_CREDENTIALS_XML)
         );
-        $this->request->addPostParameter('auth', 'oauth');
+        $this->lastRequest->addPostParameter('auth', 'oauth');
         $verify = file_get_contents(
             $this->genVerifyUrl(self::TWITTER_VERIFY_CREDENTIALS_XML)
         );
-        $this->request->addPostParameter(
+        $this->lastRequest->addPostParameter(
             'username',
             (string)simplexml_load_string($verify)->screen_name
         );

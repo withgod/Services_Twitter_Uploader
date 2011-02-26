@@ -105,6 +105,11 @@ abstract class Services_OAuthUploader
      */
     protected $request = null;
 
+    /**
+     * @see HTTP_Request2
+     * @var HTTP_Request2 upload last request object
+     */
+    protected $lastRequest = null;
 
     /**
      * @see HTTP_Request2_Response
@@ -156,7 +161,8 @@ abstract class Services_OAuthUploader
     {
         $this->postFile    = $filePath;
         $this->postMessage = $message;
-        $this->request->setUrl($this->uploadUrl);
+        $this->lastRequest = clone $this->request;
+        $this->lastRequest->setUrl($this->uploadUrl);
         $this->preUpload();
         if ($this->uploadUrl == null) {
             throw new Services_OAuthUploader_Exception(
@@ -165,7 +171,7 @@ abstract class Services_OAuthUploader
         }
 
         try {
-            $this->response = $this->request->send();
+            $this->response = $this->lastRequest->send();
         } catch (HTTP_Request2_Exception $e) {
             $this->postException = $e;
         } catch (Exception $e) {

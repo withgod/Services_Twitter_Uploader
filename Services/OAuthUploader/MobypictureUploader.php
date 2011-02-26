@@ -77,19 +77,19 @@ class Services_OAuthUploader_MobypictureUploader extends Services_OAuthUploader
      */
     protected function preUpload()
     {
-        $this->request->setConfig('ssl_verify_peer', false);
-        $this->request->addPostParameter('key', $this->apiKey);
+        $this->lastRequest->setConfig('ssl_verify_peer', false);
+        $this->lastRequest->addPostParameter('key', $this->apiKey);
         if (!empty($this->postMessage)) {
-            $this->request->addPostParameter('message', $this->postMessage);
+            $this->lastRequest->addPostParameter('message', $this->postMessage);
         }
         try {
-            $this->request->addUpload('media', $this->postFile);
+            $this->lastRequest->addUpload('media', $this->postFile);
         } catch (HTTP_Request2_Exception $e) {
             throw new Services_OAuthUploader_Exception(
                 'cannot open file ' . $this->postFile
             );
         }
-        $this->request->setHeader(
+        $this->lastRequest->setHeader(
             array(
                 'X-Auth-Service-Provider'            => self::TWITTER_VERIFY_CREDENTIALS_JSON,
                 'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(
@@ -111,7 +111,7 @@ class Services_OAuthUploader_MobypictureUploader extends Services_OAuthUploader
         $body = $this->postUploadCheck($this->response, 200);
         $resp = json_decode($body);
 
-        if (property_exists($resp, 'media') && !empty($resp->media)) {
+        if (is_object($resp) && property_exists($resp, 'media') && !empty($resp->media)) {
             return $resp->media->mediaurl;
         }
         throw new Services_OAuthUploader_Exception(
