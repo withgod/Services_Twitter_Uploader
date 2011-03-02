@@ -27,24 +27,27 @@ $packagexml->setOptions(array(
 
 ));
 
-$packagexml->setPackage('Services_OAuthUploader');
+$packagexml->setPackage('Services_Twitter_Uploader');
 $packagexml->setSummary('simple, easy post OAuth Echo Upload services.');
 $packagexml->setDescription('
     simple and easy post OAuth Echo Upload services.
 
     support upload service
-    http://img.ly/api/docs
-    http://twitgoo.com/a/help
-    http://dev.twitpic.com/
-    http://code.google.com/p/imageshackapi/
-    http://p.twipple.jp/api.php
-    http://plixi.com/api
+     * imgly
+     * plixi
+     * twipple
+     * twitgoo
+     * twitpic
+     * yfrog
+     * mobypicture
+     * twipl
+     * posterous
 
 sources
 github
-https://github.com/withgod/Services_OAuthUploader/
+https://github.com/withgod/Services_Twitter_Uploader/
 hudson
-http://sakura.withgod.jp/hudson/
+http://sakura.withgod.jp/jenkins/
 
 ');
 

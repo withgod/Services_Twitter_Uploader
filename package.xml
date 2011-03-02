@@ -3,25 +3,28 @@
     http://pear.php.net/dtd/tasks-1.0.xsd
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
- <name>Services_OAuthUploader</name>
+ <name>Services_Twitter_Uploader</name>
  <channel>__uri</channel>
  <summary>simple, easy post OAuth Echo Upload services.</summary>
  <description>
     simple and easy post OAuth Echo Upload services.
 
     support upload service
-    http://img.ly/api/docs
-    http://twitgoo.com/a/help
-    http://dev.twitpic.com/
-    http://code.google.com/p/imageshackapi/
-    http://p.twipple.jp/api.php
-    http://plixi.com/api
+     * imgly
+     * plixi
+     * twipple
+     * twitgoo
+     * twitpic
+     * yfrog
+     * mobypicture
+     * twipl
+     * posterous
 
 sources
 github
-https://github.com/withgod/Services_OAuthUploader/
+https://github.com/withgod/Services_Twitter_Uploader/
 hudson
-http://sakura.withgod.jp/hudson/
+http://sakura.withgod.jp/jenkins/
 
  </description>
  <lead>
@@ -30,8 +33,8 @@ http://sakura.withgod.jp/hudson/
   <email>noname@withgod.jp</email>
   <active>yes</active>
  </lead>
- <date>2011-01-05</date>
- <time>14:55:36</time>
+ <date>2011-03-02</date>
+ <time>18:11:54</time>
  <version>
   <release>0.1.0</release>
   <api>0.1.0</api>
@@ -47,58 +50,80 @@ initial release
  <contents>
   <dir baseinstalldir="/" name="/">
    <dir name="Services">
-    <dir name="OAuthUploader">
-     <file name="Exception.php" role="php">
+    <dir name="Twitter">
+     <dir name="Uploader">
+      <file name="Exception.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file name="ImglyUploader.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file name="MobypictureUploader.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file name="PlixiUploader.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file name="PosterousUploader.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file name="TwiplUploader.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file name="TwippleUploader.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file name="TwitgooUploader.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file name="TwitpicUploader.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+      <file name="YfrogUploader.php" role="php">
+       <tasks:replace from="@package_version@" to="version" type="package-info" />
+      </file>
+     </dir> <!-- /Services/Twitter/Uploader -->
+     <file name="Uploader.php" role="php">
       <tasks:replace from="@package_version@" to="version" type="package-info" />
      </file>
-     <file name="ImglyUploader.php" role="php">
-      <tasks:replace from="@package_version@" to="version" type="package-info" />
-     </file>
-     <file name="PlixiUploader.php" role="php">
-      <tasks:replace from="@package_version@" to="version" type="package-info" />
-     </file>
-     <file name="TwippleUploader.php" role="php">
-      <tasks:replace from="@package_version@" to="version" type="package-info" />
-     </file>
-     <file name="TwitgooUploader.php" role="php">
-      <tasks:replace from="@package_version@" to="version" type="package-info" />
-     </file>
-     <file name="TwitpicUploader.php" role="php">
-      <tasks:replace from="@package_version@" to="version" type="package-info" />
-     </file>
-     <file name="YfrogUploader.php" role="php">
-      <tasks:replace from="@package_version@" to="version" type="package-info" />
-     </file>
-    </dir> <!-- /Services/OAuthUploader -->
-    <file name="OAuthUploader.php" role="php">
-     <tasks:replace from="@package_version@" to="version" type="package-info" />
-    </file>
+    </dir> <!-- /Services/Twitter -->
    </dir> <!-- /Services -->
    <dir name="tests">
     <dir name="Services">
-     <dir name="OAuthUploader">
-      <file name="ImglyTest.php" role="php">
-       <tasks:replace from="@package_version@" to="version" type="package-info" />
-      </file>
-      <file name="OAuthUploaderBaseTest.php" role="php">
-       <tasks:replace from="@package_version@" to="version" type="package-info" />
-      </file>
-      <file name="PlixiTest.php" role="php">
-       <tasks:replace from="@package_version@" to="version" type="package-info" />
-      </file>
-      <file name="TwippleTest.php" role="php">
-       <tasks:replace from="@package_version@" to="version" type="package-info" />
-      </file>
-      <file name="TwitgooTest.php" role="php">
-       <tasks:replace from="@package_version@" to="version" type="package-info" />
-      </file>
-      <file name="TwitpicTest.php" role="php">
-       <tasks:replace from="@package_version@" to="version" type="package-info" />
-      </file>
-      <file name="YfrogTest.php" role="php">
-       <tasks:replace from="@package_version@" to="version" type="package-info" />
-      </file>
-     </dir> <!-- /tests/Services/OAuthUploader -->
+     <dir name="Twitter">
+      <dir name="Uploader">
+       <file name="ImglyTest.php" role="php">
+        <tasks:replace from="@package_version@" to="version" type="package-info" />
+       </file>
+       <file name="MobypictureTest.php" role="php">
+        <tasks:replace from="@package_version@" to="version" type="package-info" />
+       </file>
+       <file name="PlixiTest.php" role="php">
+        <tasks:replace from="@package_version@" to="version" type="package-info" />
+       </file>
+       <file name="PosterousTest.php" role="php">
+        <tasks:replace from="@package_version@" to="version" type="package-info" />
+       </file>
+       <file name="TwiplTest.php" role="php">
+        <tasks:replace from="@package_version@" to="version" type="package-info" />
+       </file>
+       <file name="TwippleTest.php" role="php">
+        <tasks:replace from="@package_version@" to="version" type="package-info" />
+       </file>
+       <file name="TwitgooTest.php" role="php">
+        <tasks:replace from="@package_version@" to="version" type="package-info" />
+       </file>
+       <file name="TwitpicTest.php" role="php">
+        <tasks:replace from="@package_version@" to="version" type="package-info" />
+       </file>
+       <file name="UploaderBaseTest.php" role="php">
+        <tasks:replace from="@package_version@" to="version" type="package-info" />
+       </file>
+       <file name="YfrogTest.php" role="php">
+        <tasks:replace from="@package_version@" to="version" type="package-info" />
+       </file>
+      </dir> <!-- /tests/Services/Twitter/Uploader -->
+     </dir> <!-- /tests/Services/Twitter -->
     </dir> <!-- /tests/Services -->
    </dir> <!-- /tests -->
   </dir> <!-- / -->
@@ -144,7 +169,7 @@ initial release
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2011-01-05</date>
+   <date>2011-03-02</date>
    <license uri="http://www.apache.org/licenses/">Apache License</license>
    <notes>
 initial release

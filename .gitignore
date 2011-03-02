@@ -3,7 +3,7 @@ tests/reports/*
 .project
 build/
 .settings
-Services_OAuthUploader-*.tgz
+Services_*.tgz
 ~$*
 *.iml
 *.ipr
