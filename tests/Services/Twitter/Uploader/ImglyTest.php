@@ -1,7 +1,5 @@
 <?php
 /**
- * An abstract interface for OAuthUploader Services
- *
  * PHP version 5.2.0+
  *
  * Copyright 2010 withgod
@@ -17,25 +15,27 @@
  * limitations under the License.
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version  GIT: $Id$
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @version  Release: @package_version@
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
 
+require_once 'Services/Twitter/Uploader/UploaderBaseTest.php';
+
 /**
- * Base exception for the {@link Services_OAuthUploader} package
+ * Imgly test class
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @link     https://github.com/withgod/Services_OAuthUploader
- * @see      PEAR_Exception
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
-class Services_OAuthUploader_Exception extends Exception
+class Services_Twitter_Uploader_ImglyUploaderTest extends Services_Twitter_Uploader_UploaderBaseTest
 {
+    protected $resultRegex = '/^http:\/\/img\.ly\/[a-zA-Z0-9]{4}$/';
 }
 
 ?>

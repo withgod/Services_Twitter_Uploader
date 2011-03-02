@@ -15,27 +15,28 @@
  * limitations under the License.
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version  Release: @package_version@
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
 
-require_once 'Services/OAuthUploader/OAuthUploaderBaseTest.php';
+require_once 'Services/Twitter/Uploader/UploaderBaseTest.php';
 
 /**
- * Twipple test class
+ * Plixi test class
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
-class Services_OAuthUploader_TwippleUploaderTest extends Services_OAuthUploader_OAuthUploaderBaseTest
+class Services_Twitter_Uploader_PlixiUploaderTest extends Services_Twitter_Uploader_UploaderBaseTest
 {
-    protected $resultRegex = '/^http:\/\/p\.twipple\.jp\/[a-zA-Z0-9]{5}$/';
+    protected $apiKey      = '6539a037-4faa-4782-ae7f-224a4d1d98e6';
+    protected $resultRegex = '/^http:\/\/plixi\.com\/p\/\d{8}$/';
 }
 
 ?>

@@ -15,27 +15,28 @@
  * limitations under the License.
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version  Release: @package_version@
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
 
-require_once 'Services/OAuthUploader/OAuthUploaderBaseTest.php';
+require_once 'Services/Twitter/Uploader/UploaderBaseTest.php';
 
 /**
- * Twitgoo test class
+ * Twitpic test class
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
-class Services_OAuthUploader_TwitgooUploaderTest extends Services_OAuthUploader_OAuthUploaderBaseTest
+class Services_Twitter_Uploader_TwitpicUploaderTest extends Services_Twitter_Uploader_UploaderBaseTest
 {
-    protected $resultRegex = '/^http:\/\/twitgoo\.com\/[a-zA-Z0-9]{6}$/';
+    protected $apiKey      = '4e38bcf446cab3c234e6fd9452aa9ee2';
+    protected $resultRegex = '/^http:\/\/twitpic\.com\/[a-zA-Z0-9]{6}$/';
 }
 
 ?>

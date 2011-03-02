@@ -17,36 +17,59 @@
  * limitations under the License.
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version  GIT: $Id$
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
 
 require_once 'HTTP/Request2.php';
-require_once 'Services/OAuthUploader.php';
+require_once 'Services/Twitter/Uploader.php';
 
 /**
  * implementation OAuthUploader Services
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version  Release: @package_version@
- * @link     https://github.com/withgod/Services_OAuthUploader
- * @link     http://apidocs.posterous.com/pages/twitter
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
+ * @link     http://www.twipl.net/api/doc
  * @see      HTTP_Request2
  */
-class Services_OAuthUploader_PosterousUploader extends Services_OAuthUploader
+class Services_Twitter_Uploader_TwiplUploader extends Services_Twitter_Uploader
 {
 
     /**
      * upload endpoint
      * @var string
      */
-    protected $uploadUrl = "http://posterous.com/api2/upload.json";
+    protected $uploadUrl = "http://api.twipl.net/2/upload.xml";
+
+    /**
+     * Constructor
+     *
+     * @param HTTP_OAuth_Consumer $oauth   oauth consumer
+     * @param string              $apiKey  required
+     * @param HTTP_Request2       $request http provider
+     *
+     * @see HTTP_OAuth_Consumer
+     * @see HTTP_Request2
+     * @throws Services_Twitter_Uploader_Exception When no API key is provided.
+     */
+    public function __construct(
+        HTTP_OAuth_Consumer $oauth = null, $apiKey = null,
+        HTTP_Request2 $request = null
+    ) {
+        parent::__construct($oauth, $apiKey, $request);
+        if (empty($apiKey)) {
+            throw new Services_Twitter_Uploader_Exception(
+                'TwiplUploader require apiKey'
+            );
+        }
+    }
 
     /**
      * preUpload implementation
@@ -56,21 +79,22 @@ class Services_OAuthUploader_PosterousUploader extends Services_OAuthUploader
     protected function preUpload()
     {
         $this->lastRequest->setConfig('ssl_verify_peer', false);
+        $this->lastRequest->addPostParameter('key', $this->apiKey);
         if (!empty($this->postMessage)) {
             $this->lastRequest->addPostParameter('message', $this->postMessage);
         }
         try {
-            $this->lastRequest->addUpload('media', $this->postFile);
+            $this->lastRequest->addUpload('media1', $this->postFile);
         } catch (HTTP_Request2_Exception $e) {
-            throw new Services_OAuthUploader_Exception(
+            throw new Services_Twitter_Uploader_Exception(
                 'cannot open file ' . $this->postFile
             );
         }
         $this->lastRequest->setHeader(
             array(
-                'X-Auth-Service-Provider'            => self::TWITTER_VERIFY_CREDENTIALS_JSON,
-                'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(
-                    self::TWITTER_VERIFY_CREDENTIALS_JSON
+                'X-OAUTH-SP-URL'        => self::TWITTER_VERIFY_CREDENTIALS_XML,
+                'X-OAUTH-AUTHORIZATION' => $this->genVerifyHeader(
+                    self::TWITTER_VERIFY_CREDENTIALS_XML
                 )
             )
         );
@@ -84,12 +108,12 @@ class Services_OAuthUploader_PosterousUploader extends Services_OAuthUploader
     protected function postUpload()
     {
         $body = $this->postUploadCheck($this->response, 200);
-        $resp = json_decode($body);
+        $resp = simplexml_load_string($body);
 
-        if (is_object($resp) && property_exists($resp, 'url') && !empty($resp->url)) {
-            return $resp->url;
+        if (property_exists($resp, 'mediaurl') && !empty($resp->mediaurl)) {
+            return (string)$resp->mediaurl;
         }
-        throw new Services_OAuthUploader_Exception(
+        throw new Services_Twitter_Uploader_Exception(
             'unKnown response [' . $body . ']'
         );
     }

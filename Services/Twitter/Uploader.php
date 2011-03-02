@@ -17,30 +17,30 @@
  * limitations under the License.
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version  GIT: $Id$
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
 
 require_once 'HTTP/Request2.php';
 require_once 'HTTP/OAuth/Consumer.php';
-require_once 'Services/OAuthUploader/Exception.php';
+require_once 'Services/Twitter/Uploader/Exception.php';
 
 /**
  * An abstract interface for OAuthUploader Services
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version  Release: @package_version@
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  * @see      HTTP_Request2
  * @see      HTTP_OAuth_Consumer
  */
-abstract class Services_OAuthUploader
+abstract class Services_Twitter_Uploader
 {
     const TWITTER_VERIFY_CREDENTIALS_JSON = "https://api.twitter.com/1/account/verify_credentials.json";
     const TWITTER_VERIFY_CREDENTIALS_XML  = "https://api.twitter.com/1/account/verify_credentials.xml";
@@ -138,7 +138,7 @@ abstract class Services_OAuthUploader
             $this->request = $request;
         } else {
             $this->request = new HTTP_Request2();
-            $_ua = 'Services_OAuthUploader/' . get_class($this)
+            $_ua = 'Services_Twitter_Uploader/' . get_class($this)
                 . ' PHP_VERSION/' . PHP_VERSION . ' PHP_OS/' . PHP_OS;
             $this->request->setHeader('User-Agent', $_ua);
         }
@@ -153,7 +153,7 @@ abstract class Services_OAuthUploader
      * @param string $filePath full path of file to upload to the service
      * @param string $message  message (tweet), only supported by some services
      *
-     * @throws {@link Services_OAuthUploader_Exception}
+     * @throws {@link Services_Twitter_Uploader_Exception}
      *
      * @return string $mediaUrl a media url
      */
@@ -165,8 +165,8 @@ abstract class Services_OAuthUploader
         $this->lastRequest->setUrl($this->uploadUrl);
         $this->preUpload();
         if ($this->uploadUrl == null) {
-            throw new Services_OAuthUploader_Exception(
-                'Incomplete implementation of Services_OAuthUploader'
+            throw new Services_Twitter_Uploader_Exception(
+                'Incomplete implementation of Services_Twitter_Uploader'
             );
         }
 
@@ -175,14 +175,14 @@ abstract class Services_OAuthUploader
         } catch (HTTP_Request2_Exception $e) {
             $this->postException = $e;
         } catch (Exception $e) {
-            throw new Services_OAuthUploader_Exception($e->getMessage());
+            throw new Services_Twitter_Uploader_Exception($e->getMessage());
         }
 
         $mediaUrl = $this->postUpload();
         //var_dump($mediaUrl);
 
         if (empty($mediaUrl)) {
-            throw new Services_OAuthUploader_Exception(
+            throw new Services_Twitter_Uploader_Exception(
                 'Incomplete implementation or not handle Exception'
             );
         }
@@ -281,9 +281,9 @@ abstract class Services_OAuthUploader
      * @param string              $apiKey      apiKey some provider is requred
      * @param HTTP_Request2       $request     optional instance of HTTP_Request2
      *
-     * @throws Services_OAuthUploader_Exception
+     * @throws Services_Twitter_Uploader_Exception
      *
-     * @return Services_OAuthUploader
+     * @return Services_Twitter_Uploader
      * @see    self::$services
      */
     public static function factory(
@@ -293,11 +293,11 @@ abstract class Services_OAuthUploader
         $lc = strtolower($serviceName);
         if (in_array($lc, self::$services)) {
             $uc = ucwords($lc);
-            include_once "Services/OAuthUploader/{$uc}Uploader.php";
-            $class = "Services_OAuthUploader_{$uc}Uploader";
+            include_once "Services/Twitter/Uploader/{$uc}Uploader.php";
+            $class = "Services_Twitter_Uploader_{$uc}Uploader";
             return new $class($oauth, $apiKey,  $request);
         }
-        throw new Services_OAuthUploader_Exception(
+        throw new Services_Twitter_Uploader_Exception(
             'unknown service name' . $serviceName . ']'
         );
     }
@@ -310,8 +310,8 @@ abstract class Services_OAuthUploader
      *
      * @return string The response body.
      *
-     * @throws Services_OAuthUploader_Exception
-     * @throws Services_OAuthUploader_Exception When the response code doesn't
+     * @throws Services_Twitter_Uploader_Exception
+     * @throws Services_Twitter_Uploader_Exception When the response code doesn't
      *                                          match what is expected.
      * @uses self::$response
      * @uses self::$postException
@@ -321,12 +321,12 @@ abstract class Services_OAuthUploader
         if (!empty($this->postException)
             && ($this->postException instanceof Exception)
         ) {
-            throw new Services_OAuthUploader_Exception(
+            throw new Services_Twitter_Uploader_Exception(
                 $this->postException->getMessage()
             );
         }
         if ($response->getStatus() != $code) {
-            throw new Services_OAuthUploader_Exception(
+            throw new Services_Twitter_Uploader_Exception(
                 'invalid response status code [' . $response->getStatus() . ']'
             );
         }

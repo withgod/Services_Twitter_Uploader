@@ -1,5 +1,7 @@
 <?php
 /**
+ * An abstract interface for OAuthUploader Services
+ *
  * PHP version 5.2.0+
  *
  * Copyright 2010 withgod
@@ -15,28 +17,25 @@
  * limitations under the License.
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version  Release: @package_version@
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @version  GIT: $Id$
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
-
-require_once 'Services/OAuthUploader/OAuthUploaderBaseTest.php';
 
 /**
- * Plixi test class
+ * Base exception for the {@link Services_Twitter_Uploader} package
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
+ * @see      PEAR_Exception
  */
-class Services_OAuthUploader_PlixiUploaderTest extends Services_OAuthUploader_OAuthUploaderBaseTest
+class Services_Twitter_Uploader_Exception extends Exception
 {
-    protected $apiKey      = '6539a037-4faa-4782-ae7f-224a4d1d98e6';
-    protected $resultRegex = '/^http:\/\/plixi\.com\/p\/\d{8}$/';
 }
 
 ?>

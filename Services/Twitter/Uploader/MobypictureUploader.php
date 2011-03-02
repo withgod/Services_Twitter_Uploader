@@ -17,36 +17,58 @@
  * limitations under the License.
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @version  Release: @package_version@
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @version  GIT: $Id$
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
 
 require_once 'HTTP/Request2.php';
-require_once 'Services/OAuthUploader.php';
+require_once 'Services/Twitter/Uploader.php';
 
 /**
  * implementation OAuthUploader Services
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version  Release: @package_version@
- * @link     https://github.com/withgod/Services_OAuthUploader
- * @link     http://img.ly/api/docs
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
+ * @link     http://developers.mobypicture.com/documentation/
  * @see      HTTP_Request2
  */
-class Services_OAuthUploader_ImglyUploader extends Services_OAuthUploader
+class Services_Twitter_Uploader_MobypictureUploader extends Services_Twitter_Uploader
 {
 
     /**
      * upload endpoint
      * @var string
      */
-    protected $uploadUrl = "http://img.ly/api/2/upload.json";
+    protected $uploadUrl = "https://api.mobypicture.com/2.0/upload.json";
+
+    /**
+     * Constructor
+     *
+     * @param HTTP_OAuth_Consumer $oauth   oauth consumer
+     * @param string              $apiKey  required
+     * @param HTTP_Request2       $request http provider
+     *
+     * @see HTTP_OAuth_Consumer
+     * @see HTTP_Request2
+     * @throws Services_Twitter_Uploader_Exception When no API key is provided.
+     */
+    function __construct(
+        $oauth = null, $apiKey = null, HTTP_Request2 $request = null
+    ) {
+        parent::__construct($oauth, $apiKey, $request);
+        if (empty($apiKey)) {
+            throw new Services_Twitter_Uploader_Exception(
+                'MobypictureUploader require apiKey'
+            );
+        }
+    }
 
     /**
      * preUpload implementation
@@ -56,19 +78,15 @@ class Services_OAuthUploader_ImglyUploader extends Services_OAuthUploader
     protected function preUpload()
     {
         $this->lastRequest->setConfig('ssl_verify_peer', false);
+        $this->lastRequest->addPostParameter('key', $this->apiKey);
         if (!empty($this->postMessage)) {
             $this->lastRequest->addPostParameter('message', $this->postMessage);
         }
         try {
-            $this->lastRequest->addUpload(
-                'media',
-                $this->postFile,
-                basename($this->postFile),
-                'application/octet-stream'
-            );
+            $this->lastRequest->addUpload('media', $this->postFile);
         } catch (HTTP_Request2_Exception $e) {
-            throw new Services_OAuthUploader_Exception(
-                'cannot open file: ' . $this->postFile
+            throw new Services_Twitter_Uploader_Exception(
+                'cannot open file ' . $this->postFile
             );
         }
         $this->lastRequest->setHeader(
@@ -84,20 +102,19 @@ class Services_OAuthUploader_ImglyUploader extends Services_OAuthUploader
     /**
      * postUpload implementation
      *
-     * @return string URL to the uploaded image.
-     *
-     * @throws Services_OAuthUploader_Exception When the response status is not 200.
-     * @throws Services_OAuthUploader_Exception On unknown response.
+     * @return string image url
+     * @throws Services_Twitter_Uploader_Exception When the response code is not 200.
+     * @throws Services_Twitter_Uploader_Exception On unknown response.
      */
     protected function postUpload()
     {
         $body = $this->postUploadCheck($this->response, 200);
         $resp = json_decode($body);
 
-        if (is_object($resp) && property_exists($resp, 'url') && !empty($resp->url)) {
-            return $resp->url;
+        if (is_object($resp) && property_exists($resp, 'media') && !empty($resp->media)) {
+            return $resp->media->mediaurl;
         }
-        throw new Services_OAuthUploader_Exception(
+        throw new Services_Twitter_Uploader_Exception(
             'unKnown response [' . $body . ']'
         );
     }

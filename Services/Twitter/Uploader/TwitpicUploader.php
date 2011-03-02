@@ -17,36 +17,36 @@
  * limitations under the License.
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version  GIT: $Id$
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
 
 require_once 'HTTP/Request2.php';
-require_once 'Services/OAuthUploader.php';
+require_once 'Services/Twitter/Uploader.php';
 
 /**
  * implementation OAuthUploader Services
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version  Release: @package_version@
- * @link     https://github.com/withgod/Services_OAuthUploader
- * @link     http://www.twipl.net/api/doc
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
+ * @link     http://dev.twitpic.com/
  * @see      HTTP_Request2
  */
-class Services_OAuthUploader_TwiplUploader extends Services_OAuthUploader
+class Services_Twitter_Uploader_TwitpicUploader extends Services_Twitter_Uploader
 {
 
     /**
      * upload endpoint
      * @var string
      */
-    protected $uploadUrl = "http://api.twipl.net/2/upload.xml";
+    protected $uploadUrl = "https://twitpic.com/api/2/upload.json";
 
     /**
      * Constructor
@@ -57,7 +57,7 @@ class Services_OAuthUploader_TwiplUploader extends Services_OAuthUploader
      *
      * @see HTTP_OAuth_Consumer
      * @see HTTP_Request2
-     * @throws Services_OAuthUploader_Exception When no API key is provided.
+     * @throws Services_Twitter_Uploader_Exception
      */
     public function __construct(
         HTTP_OAuth_Consumer $oauth = null, $apiKey = null,
@@ -65,8 +65,8 @@ class Services_OAuthUploader_TwiplUploader extends Services_OAuthUploader
     ) {
         parent::__construct($oauth, $apiKey, $request);
         if (empty($apiKey)) {
-            throw new Services_OAuthUploader_Exception(
-                'TwiplUploader require apiKey'
+            throw new Services_Twitter_Uploader_Exception(
+                'TwitpicUploader require apiKey'
             );
         }
     }
@@ -84,17 +84,17 @@ class Services_OAuthUploader_TwiplUploader extends Services_OAuthUploader
             $this->lastRequest->addPostParameter('message', $this->postMessage);
         }
         try {
-            $this->lastRequest->addUpload('media1', $this->postFile);
+            $this->lastRequest->addUpload('media', $this->postFile);
         } catch (HTTP_Request2_Exception $e) {
-            throw new Services_OAuthUploader_Exception(
+            throw new Services_Twitter_Uploader_Exception(
                 'cannot open file ' . $this->postFile
             );
         }
         $this->lastRequest->setHeader(
             array(
-                'X-OAUTH-SP-URL'        => self::TWITTER_VERIFY_CREDENTIALS_XML,
-                'X-OAUTH-AUTHORIZATION' => $this->genVerifyHeader(
-                    self::TWITTER_VERIFY_CREDENTIALS_XML
+                'X-Auth-Service-Provider'            => self::TWITTER_VERIFY_CREDENTIALS_JSON,
+                'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(
+                    self::TWITTER_VERIFY_CREDENTIALS_JSON
                 )
             )
         );
@@ -108,12 +108,12 @@ class Services_OAuthUploader_TwiplUploader extends Services_OAuthUploader
     protected function postUpload()
     {
         $body = $this->postUploadCheck($this->response, 200);
-        $resp = simplexml_load_string($body);
+        $resp = json_decode($body);
 
-        if (property_exists($resp, 'mediaurl') && !empty($resp->mediaurl)) {
-            return (string)$resp->mediaurl;
+        if (is_object($resp) && property_exists($resp, 'url') && !empty($resp->url)) {
+            return $resp->url;
         }
-        throw new Services_OAuthUploader_Exception(
+        throw new Services_Twitter_Uploader_Exception(
             'unKnown response [' . $body . ']'
         );
     }

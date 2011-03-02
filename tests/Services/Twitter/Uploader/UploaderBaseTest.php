@@ -15,39 +15,39 @@
  * limitations under the License.
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version  Release: @package_version@
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
 
 require_once 'PHPUnit/Autoload.php';
 require_once 'HTTP/OAuth/Consumer.php';
 require_once 'HTTP/Request2.php';
 
-require_once 'Services/OAuthUploader.php';
-require_once 'Services/OAuthUploader/Exception.php';
-require_once 'Services/OAuthUploader/ImglyUploader.php';
-require_once 'Services/OAuthUploader/PlixiUploader.php';
-require_once 'Services/OAuthUploader/TwippleUploader.php';
-require_once 'Services/OAuthUploader/TwitgooUploader.php';
-require_once 'Services/OAuthUploader/TwitpicUploader.php';
-require_once 'Services/OAuthUploader/YfrogUploader.php';
-require_once 'Services/OAuthUploader/MobypictureUploader.php';
-require_once 'Services/OAuthUploader/TwiplUploader.php';
-require_once 'Services/OAuthUploader/PosterousUploader.php';
+require_once 'Services/Twitter/Uploader.php';
+require_once 'Services/Twitter/Uploader/Exception.php';
+require_once 'Services/Twitter/Uploader/ImglyUploader.php';
+require_once 'Services/Twitter/Uploader/PlixiUploader.php';
+require_once 'Services/Twitter/Uploader/TwippleUploader.php';
+require_once 'Services/Twitter/Uploader/TwitgooUploader.php';
+require_once 'Services/Twitter/Uploader/TwitpicUploader.php';
+require_once 'Services/Twitter/Uploader/YfrogUploader.php';
+require_once 'Services/Twitter/Uploader/MobypictureUploader.php';
+require_once 'Services/Twitter/Uploader/TwiplUploader.php';
+require_once 'Services/Twitter/Uploader/PosterousUploader.php';
 
 /**
- * Test of Services_OAuthUploader BaseClass
+ * Test of Services_Twitter_Uploader BaseClass
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
-class Services_OAuthUploader_OAuthUploaderBaseTest extends PHPUnit_Framework_TestCase
+class Services_Twitter_Uploader_UploaderBaseTest extends PHPUnit_Framework_TestCase
 {
     protected $oauth       = null;
     protected $testAt      = null;
@@ -65,7 +65,7 @@ class Services_OAuthUploader_OAuthUploaderBaseTest extends PHPUnit_Framework_Tes
                         '222492812-2j7GRaAcKQhkNKgrpN6cQGRdd52blsbHzLKQE594', 'UdSZh5ScU58UahBojEyc1zQK5AVk1TAQDsRX97lvTRY'
                         );
         $this->testAt = date(DATE_RFC822);
-        preg_match('/Services_OAuthUploader_([a-zA-Z]+)UploaderTest$/', get_class($this), $matches);
+        preg_match('/Services_Twitter_Uploader_([a-zA-Z]+)UploaderTest$/', get_class($this), $matches);
         $this->service = $matches[1];
     }
 
@@ -73,8 +73,8 @@ class Services_OAuthUploader_OAuthUploaderBaseTest extends PHPUnit_Framework_Tes
     {
         $isFailure = false;
         try {
-            $tmp = Services_OAuthUploader::factory('fizzbuzz', $this->oauth);
-        } catch (Services_OAuthUploader_Exception $e) {
+            $tmp = Services_Twitter_Uploader::factory('fizzbuzz', $this->oauth);
+        } catch (Services_Twitter_Uploader_Exception $e) {
             $isFailure = true;
         }
         $this->assertTrue($isFailure, 'no caught unknown service exception');
@@ -82,14 +82,14 @@ class Services_OAuthUploader_OAuthUploaderBaseTest extends PHPUnit_Framework_Tes
         if (!empty($this->apiKey)) {
             $isFailure = false;
             try {
-                $tmp = Services_OAuthUploader::factory($this->service, $this->oauth);
-            } catch (Services_OAuthUploader_Exception $e) {
+                $tmp = Services_Twitter_Uploader::factory($this->service, $this->oauth);
+            } catch (Services_Twitter_Uploader_Exception $e) {
                 $isFailure = true;
             }
             $this->assertTrue($isFailure, 'no caught noapi exception');
         }
-        $uploader = Services_OAuthUploader::factory($this->service, $this->oauth, $this->apiKey);
-        $this->assertTrue(is_subclass_of($uploader, 'Services_OAuthUploader'), 'not Services_OAuthUploader subclass');
+        $uploader = Services_Twitter_Uploader::factory($this->service, $this->oauth, $this->apiKey);
+        $this->assertTrue(is_subclass_of($uploader, 'Services_Twitter_Uploader'), 'not Services_Twitter_Uploader subclass');
         return $uploader;
     }
 
@@ -98,7 +98,7 @@ class Services_OAuthUploader_OAuthUploaderBaseTest extends PHPUnit_Framework_Tes
      */
     public function testUpload($uploader)
     {
-        $url = $uploader->upload($this->uploadFile, 'Services_OAuthUploader' . $this->testAt);
+        $url = $uploader->upload($this->uploadFile, 'Services_Twitter_Uploader' . $this->testAt);
         $this->uploadUrl = $url;
         $this->assertTrue(is_string($url), 'uploaded url variable is no string [' . $url . ']');
         $this->assertRegExp($this->resultRegex, $url, 'invalid media url [' . $url . ']');
@@ -106,7 +106,7 @@ class Services_OAuthUploader_OAuthUploaderBaseTest extends PHPUnit_Framework_Tes
 
     /**
      * @depends testInitialze
-     * @expectedException Services_OAuthUploader_Exception
+     * @expectedException Services_Twitter_Uploader_Exception
      */
     public function testUploadNG($uploader)
     {

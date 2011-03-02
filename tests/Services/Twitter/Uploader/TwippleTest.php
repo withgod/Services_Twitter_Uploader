@@ -15,27 +15,27 @@
  * limitations under the License.
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version  Release: @package_version@
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
 
-require_once 'Services/OAuthUploader/OAuthUploaderBaseTest.php';
+require_once 'Services/Twitter/Uploader/UploaderBaseTest.php';
 
 /**
- * Posterous test class
+ * Twipple test class
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
-class Services_OAuthUploader_PosterousUploaderTest extends Services_OAuthUploader_OAuthUploaderBaseTest
+class Services_Twitter_Uploader_TwippleUploaderTest extends Services_Twitter_Uploader_UploaderBaseTest
 {
-    protected $resultRegex = '/^http:\/\/post.ly\/[\w\d]+/';
+    protected $resultRegex = '/^http:\/\/p\.twipple\.jp\/[a-zA-Z0-9]{5}$/';
 }
 
 ?>

@@ -17,36 +17,36 @@
  * limitations under the License.
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version  GIT: $Id$
- * @link     https://github.com/withgod/Services_OAuthUploader
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
 
 require_once 'HTTP/Request2.php';
-require_once 'Services/OAuthUploader.php';
+require_once 'Services/Twitter/Uploader.php';
 
 /**
  * implementation OAuthUploader Services
  *
  * @category Services
- * @package  Services_OAuthUploader
+ * @package  Services_Twitter_Uploader
  * @author   withgod <noname@withgod.jp>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
  * @version  Release: @package_version@
- * @link     https://github.com/withgod/Services_OAuthUploader
- * @link     http://twitgoo.com/a/help
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
+ * @link     http://p.twipple.jp/api.php
  * @see      HTTP_Request2
  */
-class Services_OAuthUploader_TwitgooUploader extends Services_OAuthUploader
+class Services_Twitter_Uploader_TwippleUploader extends Services_Twitter_Uploader
 {
 
     /**
      * upload endpoint
      * @var string
      */
-    protected $uploadUrl = "http://twitgoo.com/api/uploadAndPost";
+    protected $uploadUrl = "http://p.twipple.jp/api/upload";
 
     /**
      * preUpload implementation
@@ -55,25 +55,15 @@ class Services_OAuthUploader_TwitgooUploader extends Services_OAuthUploader
      */
     protected function preUpload()
     {
-        $this->lastRequest->setConfig('ssl_verify_peer', false);
-        if (!empty($this->postMessage)) {
-            $this->lastRequest->addPostParameter('message', $this->postMessage);
-        }
-        $this->lastRequest->addPostParameter('no_twitter_post', '1');
         try {
             $this->lastRequest->addUpload('media', $this->postFile);
         } catch (HTTP_Request2_Exception $e) {
-            throw new Services_OAuthUploader_Exception(
-                'cannot open file ' . $this->postFile
+            throw new Services_Twitter_Uploader_Exception(
+                'cannot open file: ' . $this->postFile
             );
         }
-        $this->lastRequest->setHeader(
-            array(
-                'X-Auth-Service-Provider'            => self::TWITTER_VERIFY_CREDENTIALS_JSON,
-                'X-Verify-Credentials-Authorization' => $this->genVerifyHeader(
-                    self::TWITTER_VERIFY_CREDENTIALS_JSON
-                )
-            )
+        $this->lastRequest->addPostParameter(
+            'verify_url', $this->genVerifyUrl(self::TWITTER_VERIFY_CREDENTIALS_XML)
         );
     }
 
@@ -87,10 +77,10 @@ class Services_OAuthUploader_TwitgooUploader extends Services_OAuthUploader
         $body = $this->postUploadCheck($this->response, 200);
         $resp = simplexml_load_string($body);
 
-        if ($resp['status'] == 'ok') {
+        if ($resp['stat'] == 'ok') {
             return (string)$resp->mediaurl[0];
         }
-        throw new Services_OAuthUploader_Exception(
+        throw new Services_Twitter_Uploader_Exception(
             'invalid response code [' . $resp->err['msg'] . ']'
         );
     }
