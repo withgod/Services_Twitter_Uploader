@@ -316,7 +316,7 @@ abstract class Services_Twitter_Uploader
      * @uses self::$response
      * @uses self::$postException
      */
-    protected function postUploadCheck(HTTP_Request2_Response $response, $code)
+    protected function postUploadCheck(HTTP_Request2_Response $response = null, $code)
     {
         if (!empty($this->postException)
             && ($this->postException instanceof Exception)
