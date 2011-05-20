@@ -36,7 +36,7 @@ require_once 'Services/Twitter/Uploader/UploaderBaseTest.php';
 class Services_Twitter_Uploader_PlixiUploaderTest extends Services_Twitter_Uploader_UploaderBaseTest
 {
     protected $apiKey      = '6539a037-4faa-4782-ae7f-224a4d1d98e6';
-    protected $resultRegex = '/^http:\/\/plixi\.com\/p\/\d{8}$/';
+    protected $resultRegex = '/^(http:\/\/plixi\.com\/p\/\d{8}|http:\/\/lockerz\.com\/s\/\d+)$/';
 }
 
 ?>
