@@ -35,7 +35,6 @@ require_once 'Services/Twitter/Uploader/TwitgooUploader.php';
 require_once 'Services/Twitter/Uploader/TwitpicUploader.php';
 require_once 'Services/Twitter/Uploader/YfrogUploader.php';
 require_once 'Services/Twitter/Uploader/MobypictureUploader.php';
-require_once 'Services/Twitter/Uploader/TwiplUploader.php';
 require_once 'Services/Twitter/Uploader/PosterousUploader.php';
 
 /**

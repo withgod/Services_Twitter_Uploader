@@ -31,7 +31,6 @@ require_once 'Services/Twitter/Uploader/TwitgooTest.php';
 require_once 'Services/Twitter/Uploader/TwitpicTest.php';
 require_once 'Services/Twitter/Uploader/YfrogTest.php';
 require_once 'Services/Twitter/Uploader/MobypictureTest.php';
-require_once 'Services/Twitter/Uploader/TwiplTest.php';
 require_once 'Services/Twitter/Uploader/PosterousTest.php';
 
 /**
@@ -55,7 +54,6 @@ class Framework_AllTests
         $suite->addTestSuite('Services_Twitter_Uploader_ImglyUploaderTest');
         $suite->addTestSuite('Services_Twitter_Uploader_MobypictureUploaderTest');
         $suite->addTestSuite('Services_Twitter_Uploader_PosterousUploaderTest');
-        $suite->addTestSuite('Services_Twitter_Uploader_TwiplUploaderTest');
 
         return $suite;
     }
