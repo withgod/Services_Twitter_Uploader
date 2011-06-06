@@ -316,8 +316,9 @@ abstract class Services_Twitter_Uploader
      * @uses self::$response
      * @uses self::$postException
      */
-    protected function postUploadCheck(HTTP_Request2_Response $response = null, $code)
-    {
+    protected function postUploadCheck(
+        HTTP_Request2_Response $response = null, $code = 200
+    ) {
         if (!empty($this->postException)
             && ($this->postException instanceof Exception)
         ) {
@@ -336,7 +337,7 @@ abstract class Services_Twitter_Uploader
     /**
      * set an instance of HTTP_Request2
      *
-     * @param HTTP_Request2 $request
+     * @param HTTP_Request2 $request HTTP_Request2 implments class
      *
      * @return void
      */
@@ -349,7 +350,7 @@ abstract class Services_Twitter_Uploader
     /**
      * set an instance of HTTP_OAuth_Consumer
      *
-     * @param HTTP_OAuth_Consumer $oauth
+     * @param HTTP_OAuth_Consumer $oauth HTTP_OAuth_Consumer implments class
      *
      * @return void
      */

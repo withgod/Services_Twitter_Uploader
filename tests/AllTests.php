@@ -36,12 +36,17 @@ require_once 'Services/Twitter/Uploader/PosterousTest.php';
 /**
  * TestRunner
  *
- * @author  withgod <noname@withgod.jp>
- * @license http://www.apache.org/licenses/LICENSE-2.0 Apache License
- * @link    https://github.com/withgod/Services_Twitter_Uploader
+ * @category Services
+ * @package  Services_Twitter_Uploader
+ * @author   withgod <noname@withgod.jp>
+ * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache License
+ * @link     https://github.com/withgod/Services_Twitter_Uploader
  */
 class Framework_AllTests
 {
+    /**
+     * all test suite function
+     */
     public static function suite()
     {
         $suite = new PHPUnit_Framework_TestSuite('OAuthUploader AllTestSuite');

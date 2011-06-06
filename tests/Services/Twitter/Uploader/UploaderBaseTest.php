@@ -57,6 +57,11 @@ class Services_Twitter_Uploader_UploaderBaseTest extends PHPUnit_Framework_TestC
 
     protected $apiKey  = null;
 
+    /**
+     * pre setup method
+     *
+     * @return void
+     */
     public function setUp()
     {
         $this->oauth = new HTTP_OAuth_Consumer(
@@ -68,6 +73,11 @@ class Services_Twitter_Uploader_UploaderBaseTest extends PHPUnit_Framework_TestC
         $this->service = $matches[1];
     }
 
+    /**
+     * test factory function
+     *
+     * @return $uploader test class object
+     */
     public function testInitialze()
     {
         $isFailure = false;
@@ -93,6 +103,12 @@ class Services_Twitter_Uploader_UploaderBaseTest extends PHPUnit_Framework_TestC
     }
 
     /**
+     * test function
+     *
+     * @param Services_Twitter_Uploader $uploader test target class object
+     *
+     * @return void
+     *
      * @depends testInitialze
      */
     public function testUpload($uploader)
@@ -104,6 +120,12 @@ class Services_Twitter_Uploader_UploaderBaseTest extends PHPUnit_Framework_TestC
     }
 
     /**
+     * testNG function
+     *
+     * @param Services_Twitter_Uploader $uploader test target class object
+     *
+     * @return void
+     *
      * @depends testInitialze
      * @expectedException Services_Twitter_Uploader_Exception
      */
