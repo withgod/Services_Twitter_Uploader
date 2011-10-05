@@ -67,9 +67,6 @@ initial release
       <file name="PosterousUploader.php" role="php">
        <tasks:replace from="@package_version@" to="version" type="package-info" />
       </file>
-      <file name="TwiplUploader.php" role="php">
-       <tasks:replace from="@package_version@" to="version" type="package-info" />
-      </file>
       <file name="TwippleUploader.php" role="php">
        <tasks:replace from="@package_version@" to="version" type="package-info" />
       </file>
@@ -102,9 +99,6 @@ initial release
         <tasks:replace from="@package_version@" to="version" type="package-info" />
        </file>
        <file name="PosterousTest.php" role="php">
-        <tasks:replace from="@package_version@" to="version" type="package-info" />
-       </file>
-       <file name="TwiplTest.php" role="php">
         <tasks:replace from="@package_version@" to="version" type="package-info" />
        </file>
        <file name="TwippleTest.php" role="php">
