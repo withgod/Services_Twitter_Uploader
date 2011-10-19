@@ -33,7 +33,7 @@ http://sakura.withgod.jp/jenkins/
   <email>noname@withgod.jp</email>
   <active>yes</active>
  </lead>
- <date>2011-03-02</date>
+ <date>2011-10-19</date>
  <time>18:11:54</time>
  <version>
   <release>0.1.0</release>
@@ -163,7 +163,7 @@ initial release
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2011-03-02</date>
+   <date>2011-10-19</date>
    <license uri="http://www.apache.org/licenses/">Apache License</license>
    <notes>
 initial release
