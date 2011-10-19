@@ -4,7 +4,7 @@
     http://pear.php.net/dtd/package-2.0
     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Services_Twitter_Uploader</name>
- <channel>__uri</channel>
+ <channel>pear.php.net</channel>
  <summary>simple, easy post OAuth Echo Upload services.</summary>
  <description>
     simple and easy post OAuth Echo Upload services.
